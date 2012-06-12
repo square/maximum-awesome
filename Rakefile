@@ -12,6 +12,7 @@ end
 def step(description)
   description = "-- #{description} "
   description = description.ljust(80, '-')
+  puts
   puts "\e[32m#{description}\e[0m"
 end
 
@@ -53,5 +54,13 @@ task :default do
   sh 'open', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')
   sh 'open', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')
 
-  # TODO prompt for how to configure iterm2
+  step 'iterm2 profiles'
+  puts
+  puts "  Your turn!"
+  puts
+  puts "  Go and manually set up Solarized Light and Dark profiles in iTerm2."
+  puts "  Be sure to set Terminal Type to 'xterm-256color' in the 'Terminal' tab."
+  puts
+  puts "  Enjoy!"
+  puts
 end

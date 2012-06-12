@@ -51,8 +51,8 @@ task :default do
   ln_sf File.expand_path('vimrc'),     File.expand_path('~/.vimrc'),     :verbose => true
 
   step 'iterm2 colorschemes'
-  sh 'open', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')
-  sh 'open', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')
+  sh 'open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')
+  sh 'open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')
 
   step 'iterm2 profiles'
   puts

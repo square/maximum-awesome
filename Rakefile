@@ -19,6 +19,7 @@ desc 'Install these config files.'
 task :default do
   step 'brew'
   brew_install 'ctags', 'macvim', 'reattach-to-user-namespace', 'tmux'
+  # TODO for macvim, --override-system-vim
 
   step 'git submodules'
   sh 'git submodule update --init'
@@ -28,9 +29,8 @@ task :default do
     sh "rake make"
   end
 
-  # include solarized colorschemes for iTerm2, and configure them?
-  # install gem ctags?
-  # run gem ctags?
+  # TODO install gem ctags?
+  # TODO run gem ctags?
 
   step 'git templates'
   sh "git config --global init.templatedir #{File.expand_path('git_template')}"
@@ -44,4 +44,6 @@ task :default do
   step 'iterm2 colorschemes'
   sh 'open', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')
   sh 'open', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')
+
+  # TODO prompt for how to configure iterm2
 end

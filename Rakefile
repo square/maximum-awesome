@@ -17,6 +17,14 @@ end
 
 desc 'Install these config files.'
 task :default do
+  step 'iterm2'
+  unless File.directory?('/Applications/iTerm.app')
+    system "curl -O http://iterm2.googlecode.com/files/iTerm2_v1_0_0.zip"
+    system 'unzip iTerm2_v1_0_0.zip'
+    system 'mv iTerm.app /Applications'
+    system 'rm iTerm2_v1_0_0.zip'
+  end
+
   step 'brew'
   brew_install 'ctags', 'macvim', 'reattach-to-user-namespace', 'tmux'
   # TODO for macvim, --override-system-vim

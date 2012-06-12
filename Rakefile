@@ -41,14 +41,16 @@ task :default do
   # TODO install gem ctags?
   # TODO run gem ctags?
 
-  step 'git templates'
-  sh "git config --global init.templatedir #{File.expand_path('git_template')}"
-
   step 'symlink'
+  rm_rf File.expand_path('~/.git_template')
   rm_rf File.expand_path('~/.vim')
-  ln_sf File.expand_path('tmux.conf'), File.expand_path('~/.tmux.conf'), :verbose => true
-  ln_sf File.expand_path('vim'),       File.expand_path('~/.vim'),       :verbose => true
-  ln_sf File.expand_path('vimrc'),     File.expand_path('~/.vimrc'),     :verbose => true
+  ln_sf File.expand_path('git_template'), File.expand_path('~/.git_template'), :verbose => true
+  ln_sf File.expand_path('tmux.conf'),    File.expand_path('~/.tmux.conf'),    :verbose => true
+  ln_sf File.expand_path('vim'),          File.expand_path('~/.vim'),          :verbose => true
+  ln_sf File.expand_path('vimrc'),        File.expand_path('~/.vimrc'),        :verbose => true
+
+  step 'git templates'
+  sh 'git config --global init.templatedir \~/.git_template'
 
   step 'iterm2 colorschemes'
   sh 'open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')

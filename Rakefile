@@ -49,6 +49,10 @@ task :default do
   ln_sf File.expand_path('vim'),          File.expand_path('~/.vim'),          :verbose => true
   ln_sf File.expand_path('vimrc'),        File.expand_path('~/.vimrc'),        :verbose => true
 
+  unless File.exist?(File.expand_path('~/.vimrc.local'))
+    cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
+  end
+
   step 'git templates'
   sh 'git config --global init.templatedir \~/.git_template'
 

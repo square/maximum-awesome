@@ -1,0 +1,9 @@
+set nocursorline " don't highlight current line
+
+" keyboard shortcuts
+inoremap jj <ESC>
+
+" gui settings
+if (&t_Co == 256 || has('gui_running'))
+  colorscheme solarized
+endif

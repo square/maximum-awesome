@@ -1,12 +1,10 @@
-def brew_install(*packages)
-  uninstalled = packages.select do |package|
-    `brew list #{package}`
-    !$?.success?
-  end
+def brew_install(package, *options)
+  Rake::Task['brew_update'].invoke
 
-  if uninstalled.any?
-    sh "brew install #{uninstalled.join(' ')}"
-  end
+  `brew list #{package}`
+  return if $?.success?
+
+  sh "brew install #{package} #{options.join ' '}"
 end
 
 def step(description)
@@ -16,26 +14,94 @@ def step(description)
   puts "\e[32m#{description}\e[0m"
 end
 
-desc 'Install these config files.'
-task :default do
-  step 'iterm2'
-  unless File.directory?('/Applications/iTerm.app')
-    system "curl -O http://iterm2.googlecode.com/files/iTerm2_v1_0_0.zip"
-    system 'unzip iTerm2_v1_0_0.zip'
-    system 'mv iTerm.app /Applications'
-    system 'rm iTerm2_v1_0_0.zip'
+def app_path(name)
+  path = "/Applications/#{name}.app"
+  ["~#{path}", path].each do |full_path|
+    return full_path if File.directory?(full_path)
   end
 
-  step 'brew'
-  brew_install 'ctags', 'macvim', 'reattach-to-user-namespace', 'tmux'
-  # TODO for macvim, --override-system-vim
+  return nil
+end
+
+def app?(name)
+  return !app_path(name).nil?
+end
+
+task :brew_update do
+  `brew update`
+end
+
+namespace :install do
+  desc 'Install iTerm'
+  task :iterm do
+    step 'iterm2'
+    unless app? 'iTerm'
+      system <<-SHELL
+        curl -L -o iterm.zip http://iterm2.googlecode.com/files/iTerm2-1_0_0_20120203.zip && \
+          unzip iterm.zip && \
+          mv iTerm.app /Applications && \
+          rm iterm.zip
+      SHELL
+    end
+  end
+
+  desc 'Install ctags'
+  task :ctags do
+    step 'ctags'
+    brew_install 'ctags'
+  end
+
+  desc 'Install reattach-to-user-namespace'
+  task :reattach_to_user_namespace do
+    step 'reattach-to-user-namespace'
+    brew_install 'reattach-to-user-namespace'
+  end
+
+  desc 'Install tmux'
+  task :tmux do
+    step 'tmux'
+    brew_install 'tmux'
+  end
+
+  desc 'Install MacVim'
+  task :macvim do
+    step 'MacVim'
+    unless app? 'MacVim'
+      system <<-SHELL
+        curl -L -o macvim.tbz https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-64.tbz && \
+          bunzip2 macvim.tbz && tar xf macvim.tar && \
+          mv MacVim-snapshot-64/MacVim.app /Applications && \
+          rm -rf macvim.tbz macvim.tar MacVim-snapshot-64
+      SHELL
+      system ''
+    end
+
+    bin_vim = File.expand_path('~/bin/vim')
+    unless File.executable?(bin_vim)
+      File.open(bin_vim, 'w', 0744) do |io|
+        io << <<-SHELL
+#!/bin/bash
+exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
+        SHELL
+      end
+    end
+  end
+end
+
+desc 'Install these config files.'
+task :default do
+  Rake::Task['install:iterm'].invoke
+  Rake::Task['install:ctags'].invoke
+  Rake::Task['install:reattach_to_user_namespace'].invoke
+  Rake::Task['install:tmux'].invoke
+  Rake::Task['install:macvim'].invoke
 
   step 'git submodules'
   sh 'git submodule update --init'
 
   step 'command-t'
   Dir.chdir 'vim/bundle/command-t' do
-    sh "rake make"
+    sh 'env PATH=/bin:/usr/bin rake make'
   end
 
   # TODO install gem ctags?

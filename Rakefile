@@ -118,8 +118,11 @@ task :default do
   end
 
   step 'iterm2 colorschemes'
-  sh 'open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')
-  sh 'open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')
+  colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
+  dark  = colorschemes.grep(/Solarized Dark/).empty?
+  light = colorschemes.grep(/Solarized Light/).empty?
+  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
+  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
 
   step 'iterm2 profiles'
   puts

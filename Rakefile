@@ -108,9 +108,7 @@ task :default do
   # TODO run gem ctags?
 
   step 'symlink'
-  rm_rf File.expand_path('~/.git_template')
   rm_rf File.expand_path('~/.vim')
-  ln_sf File.expand_path('git_template'), File.expand_path('~/.git_template'), :verbose => true
   ln_sf File.expand_path('tmux.conf'),    File.expand_path('~/.tmux.conf'),    :verbose => true
   ln_sf File.expand_path('vim'),          File.expand_path('~/.vim'),          :verbose => true
   ln_sf File.expand_path('vimrc'),        File.expand_path('~/.vimrc'),        :verbose => true
@@ -118,9 +116,6 @@ task :default do
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end
-
-  step 'git templates'
-  sh 'git config --global init.templatedir \~/.git_template'
 
   step 'iterm2 colorschemes'
   sh 'open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')

@@ -32,6 +32,12 @@ task :brew_update do
 end
 
 namespace :install do
+  desc 'Install Ack'
+  task :ack do
+    step 'ack'
+    brew_install 'ack'
+  end
+
   desc 'Install iTerm'
   task :iterm do
     step 'iterm2'
@@ -90,6 +96,7 @@ end
 
 desc 'Install these config files.'
 task :default do
+  Rake::Task['install:ack'].invoke
   Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke

@@ -73,3 +73,6 @@
 [submodule "vim/bundle/jshint"]
 	path = vim/bundle/jshint
 	url = git://github.com/rmanalan/jshint.vim.git
+[submodule "vim/bundle/protobuf"]
+	path = vim/bundle/protobuf
+	url = git://github.com/uarun/vim-protobuf.git

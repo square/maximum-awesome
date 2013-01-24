@@ -5,5 +5,9 @@ inoremap jj <ESC>
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
-  colorscheme solarized
+  if ($TERM_PROGRAM == 'Apple_Terminal')
+    colorscheme desert
+  else
+    colorscheme solarized
+  endif
 endif

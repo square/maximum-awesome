@@ -30,7 +30,7 @@ set showcmd
 set smartcase      " case-sensitive search if any caps
 set softtabstop=2  " insert mode tab and backspace use 2 spaces
 set tabstop=8      " actual tabs occupy 8 characters
-set wildignore=log/**,tmp/**,*.rbc
+set wildignore=log/**,target/**,tmp/**,*.rbc
 set wildmenu       " show a navigable menu for tab completion
 set wildmode=longest,list,full
 

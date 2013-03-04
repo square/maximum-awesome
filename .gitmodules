@@ -76,3 +76,6 @@
 [submodule "vim/bundle/protobuf"]
 	path = vim/bundle/protobuf
 	url = git://github.com/uarun/vim-protobuf.git
+[submodule "vim/bundle/gitgutter"]
+	path = vim/bundle/gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git

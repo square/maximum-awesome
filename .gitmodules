@@ -6,7 +6,7 @@
 	url = git://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
-	url = https://github.com/wincent/Command-T
+	url = git://github.com/wincent/Command-T
 [submodule "vim/bundle/cucumber"]
 	path = vim/bundle/cucumber
 	url = git://github.com/tpope/vim-cucumber.git
@@ -15,7 +15,7 @@
 	url = git://github.com/tpope/vim-endwise.git
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive
 [submodule "vim/bundle/indentobject"]
 	path = vim/bundle/indentobject
 	url = git://github.com/austintaylor/vim-indentobject.git
@@ -48,13 +48,13 @@
 	url = git://github.com/tpope/vim-pastie.git
 [submodule "vim/bundle/snipmate"]
 	path = vim/bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim
+	url = git://github.com/msanders/snipmate.vim
 [submodule "vim/bundle/solarized"]
 	path = vim/bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/bundle/javascript"]
 	path = vim/bundle/javascript
-	url = https://github.com/pangloss/vim-javascript.git
+	url = git://github.com/pangloss/vim-javascript.git
 [submodule "vim/bundle/ragtag"]
 	path = vim/bundle/ragtag
 	url = git://github.com/tpope/vim-ragtag.git

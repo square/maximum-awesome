@@ -83,6 +83,7 @@ namespace :install do
     end
 
     bin_vim = File.expand_path('~/bin/vim')
+    FileUtils.mkdir_p(File.dirname(bin_vim))
     unless File.executable?(bin_vim)
       File.open(bin_vim, 'w', 0744) do |io|
         io << <<-SHELL

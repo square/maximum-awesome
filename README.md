@@ -1,9 +1,8 @@
 Maximum Awesome
 ===============
 
-Config files for vim and tmux, lovingly tended by the Dashboard team.
-
-![Dos Equis Guy Gives Vim Advice](https://git.squareup.com/square/maximum-awesome/raw/master/dos-equis-vim.jpg)
+Config files for vim and tmux, lovingly tended by a small subculture of
+peace-loving hippies.
 
 Install
 -------

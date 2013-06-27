@@ -108,7 +108,7 @@ task :default do
 
   step 'command-t'
   Dir.chdir 'vim/bundle/command-t' do
-    sh 'env PATH=/bin:/usr/bin rake make'
+    sh 'rake make'
   end
 
   # TODO install gem ctags?

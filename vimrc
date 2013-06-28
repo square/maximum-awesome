@@ -33,6 +33,8 @@ set tabstop=8      " actual tabs occupy 8 characters
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu       " show a navigable menu for tab completion
 set wildmode=longest,list,full
+set mouse=a        " Enable mouse usage for visual and adjusting buffers
+set ttymouse=xterm2
 
 " keyboard shortcuts
 let mapleader = ','

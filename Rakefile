@@ -108,7 +108,8 @@ task :default do
 
   step 'command-t'
   Dir.chdir 'vim/bundle/command-t' do
-    sh 'rake make'
+    # Needs to use system ruby
+    sh '/usr/bin/rake make'
   end
 
   # TODO install gem ctags?

@@ -32,10 +32,10 @@ task :brew_update do
 end
 
 namespace :install do
-  desc 'Install Ack'
-  task :ack do
-    step 'ack'
-    brew_install 'ack'
+  desc 'Install The Silver Searcher'
+  task :the_silver_searcher do
+    step 'the_silver_searcher'
+    brew_install 'the_silver_searcher'
   end
 
   desc 'Install iTerm'
@@ -97,7 +97,7 @@ end
 
 desc 'Install these config files.'
 task :default do
-  Rake::Task['install:ack'].invoke
+  Rake::Task['install:the_silver_searcher'].invoke
   Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke

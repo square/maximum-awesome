@@ -55,6 +55,8 @@ nmap <leader>g :ToggleGitGutter<CR>
 let g:CommandTMaxHeight=20
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
+" ZOMG the_silver_searcher is so much faster than ack"
+let g:ackprg = 'ag --nogroup --column'
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml

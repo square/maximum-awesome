@@ -27,6 +27,30 @@ def app?(name)
   return !app_path(name).nil?
 end
 
+def link_file(original_filename, symlink_filename)
+  original_path = File.expand_path(original_filename)
+  symlink_path = File.expand_path(symlink_filename)
+  if File.exists?(symlink_path)
+    # Symlink already configured properly. Leave it alone.
+    return if File.symlink?(symlink_path) and File.readlink(symlink_path) == original_path
+    # Never move user's files without creating backups first
+    number = 1
+    loop do
+      backup_path = "#{symlink_path}.bak"
+      if number > 1
+        backup_path = "#{backup_path}#{number}"
+      end
+      if File.exists?(backup_path)
+        number += 1
+        next
+      end
+      mv symlink_path, backup_path, :verbose => true
+      break
+    end
+  end
+  ln_s original_path, symlink_path, :verbose => true
+end
+
 task :brew_update do
   `brew update`
 end
@@ -116,11 +140,9 @@ task :default do
   # TODO run gem ctags?
 
   step 'symlink'
-  rm_rf File.expand_path('~/.vim')
-  ln_sf File.expand_path('tmux.conf'),    File.expand_path('~/.tmux.conf'),    :verbose => true
-  ln_sf File.expand_path('vim'),          File.expand_path('~/.vim'),          :verbose => true
-  ln_sf File.expand_path('vimrc'),        File.expand_path('~/.vimrc'),        :verbose => true
-
+  link_file 'vim'       , '~/.vim'
+  link_file 'tmux.conf' , '~/.tmux.conf'
+  link_file 'vimrc'     , '~/.vimrc'
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end

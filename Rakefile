@@ -1,6 +1,4 @@
 def brew_install(package, *options)
-  Rake::Task['brew_update'].invoke
-
   `brew list #{package}`
   return if $?.success?
 
@@ -51,11 +49,13 @@ def link_file(original_filename, symlink_filename)
   ln_s original_path, symlink_path, :verbose => true
 end
 
-task :brew_update do
-  `brew update`
-end
-
 namespace :install do
+  desc 'Update or Install Brew'
+  task :brew do
+    step 'Homebrew'
+    system('which brew && brew update || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
+  end
+
   desc 'Install The Silver Searcher'
   task :the_silver_searcher do
     step 'the_silver_searcher'
@@ -121,6 +121,7 @@ end
 
 desc 'Install these config files.'
 task :default do
+  Rake::Task['install:brew'].invoke
   Rake::Task['install:the_silver_searcher'].invoke
   Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke

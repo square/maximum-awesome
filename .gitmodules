@@ -96,10 +96,10 @@
 	url = https://github.com/vim-scripts/matchit.zip.git
 [submodule "vim/bundle/kwbd"]
 	path = vim/bundle/kwbd
-	url = git@github.com:vim-scripts/kwbdi.vim.git
+	url = https://github.com/vim-scripts/kwbdi.vim.git
 [submodule "vim/bundle/vim-indent-guides"]
 	path = vim/bundle/vim-indent-guides
-	url = git@github.com:nathanaelkane/vim-indent-guides.git
+	url = https://github.com/nathanaelkane/vim-indent-guides.git
 [submodule "vim/bundle/mustache"]
 	path = vim/bundle/mustache
-	url = git@github.com:juvenn/mustache.vim.git
+	url = https://github.com/juvenn/mustache.vim.git

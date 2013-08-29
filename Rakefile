@@ -162,7 +162,9 @@ task :default do
   puts "  Your turn!"
   puts
   puts "  Go and manually set up Solarized Light and Dark profiles in iTerm2."
-  puts "  Be sure to set Terminal Type to 'xterm-256color' in the 'Terminal' tab."
+  puts "  (You can do this in 'Preferences' -> 'Profiles' by adding a new profile,"
+  puts "  then clicking the 'Colors' tab, 'Load Presets...' and choosing a Solarized option.)"
+  puts "  Also be sure to set Terminal Type to 'xterm-256color' in the 'Terminal' tab."
   puts
   puts "  Enjoy!"
   puts

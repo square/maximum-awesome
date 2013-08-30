@@ -6,6 +6,15 @@ filetype plugin indent on
 " don't bother with vi compatibility
 set nocompatible
 
+" configure Vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" install Vundle bundles
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
 " enable syntax highlighting
 syntax enable
 
@@ -47,7 +56,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <leader>l :Align
-nmap <leader>a :Ack 
+nmap <leader>a :Ack
 nmap <leader>b :CommandTBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>

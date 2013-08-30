@@ -1,0 +1,2 @@
+" list bundles you want to install here
+Bundle 'gmarik/vundle'

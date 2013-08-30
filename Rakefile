@@ -53,7 +53,7 @@ namespace :install do
   desc 'Update or Install Brew'
   task :brew do
     step 'Homebrew'
-    unless system('which brew > /dev/null && brew update || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
+    unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
       raise "Homebrew must be installed before continuing."
     end
   end

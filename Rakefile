@@ -5,6 +5,13 @@ def brew_install(package, *options)
   sh "brew install #{package} #{options.join ' '}"
 end
 
+def install_github_bundle(user, package)
+  `git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}`
+  return if $?.success?
+
+  sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
+end
+
 def step(description)
   description = "-- #{description} "
   description = description.ljust(80, '-')
@@ -118,6 +125,12 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
         SHELL
       end
     end
+  end
+
+  desc 'Install Vundle'
+  task :vundle do
+    step 'vundle'
+    install_github_bundle 'gmarik' 'vundle'
   end
 end
 

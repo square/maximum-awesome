@@ -48,11 +48,11 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <leader>l :Align
 nmap <leader>a :Ack 
-nmap <leader>b :CommandTBuffer<CR>
+nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :CommandT<CR>
-nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
+nmap <leader>t :CtrlP<CR>
+nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
@@ -60,7 +60,8 @@ nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
-let g:CommandTMaxHeight=20
+let g:ctrlp_match_window = 'order:ttb,max:20'
+let g:ctrlp_clear_cache_on_exit = 0
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 " ZOMG the_silver_searcher is so much faster than ack"

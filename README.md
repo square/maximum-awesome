@@ -17,6 +17,7 @@ peace-loving hippies. Built for Mac OS X.
 * `,b` restricts Command-T to open buffers
 * `,a` starts project search with [ack.vim](https://github.com/mileszs/ack.vim) using [ag](https://github.com/ggreer/the_silver_searcher) (like ack)
 * `ds`/`cs` delete/change surrounding characters (e.g. `"Hey!"` + `ds"` = `Hey!`, `"Hey!"` + `cs"'` = `'Hey!'`) with [vim-surround](https://github.com/tpope/vim-surround)
+* `,,` starts bulk motion operations using [easymotion](https://github.com/Lokaltog/vim-easymotion.git) (e.g. `,,e` provides targets for ends of words, `,,j` provides targets for lines down)
 * `\\\` toggles current line comment
 * `\\` toggles visual selection comment lines
 * `vii`/`vai` visually select *in* or *around* the cursor's indent

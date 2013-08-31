@@ -10,6 +10,7 @@ call vundle#rc()
 " install Vundle bundles
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
+  source ~/.vimrc.bundles.local
 endif
 
 " enable syntax highlighting

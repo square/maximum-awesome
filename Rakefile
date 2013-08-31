@@ -146,7 +146,6 @@ task :default do
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
   Rake::Task['install:macvim'].invoke
-  Rake::Task['install:vundle'].invoke
 
   step 'git submodules'
   sh 'git submodule update --init'
@@ -155,13 +154,17 @@ task :default do
   # TODO run gem ctags?
 
   step 'symlink'
-  link_file 'vim'       , '~/.vim'
-  link_file 'tmux.conf' , '~/.tmux.conf'
-  link_file 'vimrc'     , '~/.vimrc'
-  link_file 'vimrc.bundles'     , '~/.vimrc.bundles'
+  link_file 'vim'                   , '~/.vim'
+  link_file 'tmux.conf'             , '~/.tmux.conf'
+  link_file 'vimrc'                 , '~/.vimrc'
+  link_file 'vimrc.bundles'         , '~/.vimrc.bundles'
+  link_file 'vimrc.bundles.local'   , '~/.vimrc.bundles.local'
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end
+
+  # Install Vundle and bundles
+  Rake::Task['install:vundle'].invoke
 
   step 'iterm2 colorschemes'
   colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`

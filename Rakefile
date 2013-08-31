@@ -25,25 +25,36 @@ def app?(name)
   return !app_path(name).nil?
 end
 
+def get_backup_path(path)
+  number = 1
+    backup_path = "#{path}.bak"
+  loop do
+    if number > 1
+      backup_path = "#{backup_path}#{number}"
+    end
+    if File.exists?(backup_path) or File.symlink?(backup_path)
+      number += 1
+      next
+    end
+    break
+  end
+  backup_path
+end
+
 def link_file(original_filename, symlink_filename)
   original_path = File.expand_path(original_filename)
   symlink_path = File.expand_path(symlink_filename)
-  if File.exists?(symlink_path)
-    # Symlink already configured properly. Leave it alone.
-    return if File.symlink?(symlink_path) and File.readlink(symlink_path) == original_path
-    # Never move user's files without creating backups first
-    number = 1
-    loop do
-      backup_path = "#{symlink_path}.bak"
-      if number > 1
-        backup_path = "#{backup_path}#{number}"
-      end
-      if File.exists?(backup_path)
-        number += 1
-        next
-      end
-      mv symlink_path, backup_path, :verbose => true
-      break
+  if File.exists?(symlink_path) or File.symlink?(symlink_path)
+    if File.symlink?(symlink_path)
+      symlink_points_to_path = File.readlink(symlink_path)
+      return if symlink_points_to_path == original_path
+      # Symlinks can't just be moved like regular files. Recreate old one, and
+      # remove it.
+      ln_s symlink_points_to_path, get_backup_path(symlink_path), :verbose => true
+      rm symlink_path
+    else
+      # Never move user's files without creating backups first
+      mv symlink_path, get_backup_path(symlink_path), :verbose => true
     end
   end
   ln_s original_path, symlink_path, :verbose => true

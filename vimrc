@@ -48,11 +48,11 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <leader>l :Align
 nmap <leader>a :Ack 
-nmap <leader>b :CommandTBuffer<CR>
+nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :CommandT<CR>
-nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
+nmap <leader>t :CtrlP<CR>
+nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR><CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
@@ -60,11 +60,20 @@ nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " plugin settings
-let g:CommandTMaxHeight=20
+let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
-" ZOMG the_silver_searcher is so much faster than ack"
-let g:ackprg = 'ag --nogroup --column'
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --column'
+
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml

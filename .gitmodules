@@ -4,9 +4,6 @@
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = git://github.com/wincent/Command-T
 [submodule "vim/bundle/cucumber"]
 	path = vim/bundle/cucumber
 	url = git://github.com/tpope/vim-cucumber.git
@@ -103,3 +100,6 @@
 [submodule "vim/bundle/mustache"]
 	path = vim/bundle/mustache
 	url = https://github.com/juvenn/mustache.vim.git
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git

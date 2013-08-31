@@ -9,7 +9,9 @@ def install_github_bundle(user, package)
   `git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}`
   return if $?.success?
 
-  sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
+  if File.exists?('~/.vim/bundle/#{package}')
+    sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
+  end
 end
 
 def step(description)
@@ -130,7 +132,8 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
   desc 'Install Vundle'
   task :vundle do
     step 'vundle'
-    install_github_bundle 'gmarik' 'vundle'
+    install_github_bundle 'gmarik','vundle'
+    sh 'vim -c "BundleInstall"'
   end
 end
 
@@ -155,6 +158,7 @@ task :default do
   link_file 'vim'       , '~/.vim'
   link_file 'tmux.conf' , '~/.tmux.conf'
   link_file 'vimrc'     , '~/.vimrc'
+  link_file 'vimrc.bundles'     , '~/.vimrc.bundles'
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end

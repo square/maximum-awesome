@@ -1,12 +1,9 @@
-" set up pathogen, https://github.com/tpope/vim-pathogen
-filetype off
-call pathogen#infect()
-filetype plugin indent on
-
 " don't bother with vi compatibility
 set nocompatible
 
 " configure Vundle
+filetype off
+filetype plugin indent on
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 

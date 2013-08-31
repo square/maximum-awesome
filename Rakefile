@@ -143,6 +143,7 @@ task :default do
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
   Rake::Task['install:macvim'].invoke
+  Rake::Task['install:vundle'].invoke
 
   step 'git submodules'
   sh 'git submodule update --init'

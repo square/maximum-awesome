@@ -134,11 +134,6 @@ task :default do
   step 'git submodules'
   sh 'git submodule update --init'
 
-  step 'command-t'
-  Dir.chdir 'vim/bundle/command-t' do
-    sh 'env PATH=/bin:/usr/bin rake make'
-  end
-
   # TODO install gem ctags?
   # TODO run gem ctags?
 

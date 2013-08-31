@@ -13,8 +13,8 @@ peace-loving hippies. Built for Mac OS X.
 ### vim
 
 * `,d` brings up [NERDTree](https://github.com/scrooloose/nerdtree), a sidebar buffer for navigating and manipulating files
-* `,t` brings up [Command-T](https://github.com/wincent/Command-T), a project file filter for easily opening specific files
-* `,b` restricts Command-T to open buffers
+* `,t` brings up [ctrlp.vim](https://github.com/kien/ctrlp.vim), a project file filter for easily opening specific files
+* `,b` restricts ctrlp.vim to open buffers
 * `,a` starts project search with [ack.vim](https://github.com/mileszs/ack.vim) using [ag](https://github.com/ggreer/the_silver_searcher) (like ack)
 * `ds`/`cs` delete/change surrounding characters (e.g. `"Hey!"` + `ds"` = `Hey!`, `"Hey!"` + `cs"'` = `'Hey!'`) with [vim-surround](https://github.com/tpope/vim-surround)
 * `\\\` toggles current line comment
@@ -35,11 +35,6 @@ peace-loving hippies. Built for Mac OS X.
 ## Install
 
     rake
-
-## Troubleshoot
-
-If you have trouble compiling the Command-T C extension, check mkmf.log in the
-current directory; you may need to use `xcode-select(1)`.
 
 ## Contributing
 

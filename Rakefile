@@ -6,9 +6,6 @@ def brew_install(package, *options)
 end
 
 def install_github_bundle(user, package)
-  `git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}`
-  return if $?.success?
-
   if File.exists?('~/.vim/bundle/#{package}')
     sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
   end
@@ -133,7 +130,7 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
   task :vundle do
     step 'vundle'
     install_github_bundle 'gmarik','vundle'
-    sh 'vim -c "BundleInstall"'
+    sh 'vim -c "BundleInstall" -c "q" -c "q"'
   end
 end
 

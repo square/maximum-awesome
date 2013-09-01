@@ -6,7 +6,7 @@ def brew_install(package, *options)
 end
 
 def install_github_bundle(user, package)
-  if File.exists?('~/.vim/bundle/#{package}')
+  unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
     sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
   end
 end

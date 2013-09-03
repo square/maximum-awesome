@@ -155,9 +155,11 @@ task :default do
   link_file 'tmux.conf'             , '~/.tmux.conf'
   link_file 'vimrc'                 , '~/.vimrc'
   link_file 'vimrc.bundles'         , '~/.vimrc.bundles'
-  link_file 'vimrc.bundles.local'   , '~/.vimrc.bundles.local'
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
+  end
+  unless File.exist?(File.expand_path('~/.vimrc.bundles.local'))
+    cp File.expand_path('vimrc.bundles.local'), File.expand_path('~/.vimrc.bundles.local'), :verbose => true
   end
 
   # Install Vundle and bundles

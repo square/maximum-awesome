@@ -119,6 +119,31 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
       end
     end
   end
+
+  desc 'Install Vim plugins'
+  task :vim_plugins do
+    step 'Vim plugins'
+
+    plugins_directory = 'vim/bundle'
+    File.readlines('vim/.plugins').each do |plugin|
+      name, repo = plugin.split(/\s+/)
+
+      if File.directory?(directory = "#{ plugins_directory }/#{ name }")
+        puts "Updating #{ name }"
+        sh "cd #{ directory } && git pull"
+      else
+        puts "Installing #{ name }"
+        sh "git clone #{ repo } #{ directory }"
+      end
+    end
+  end
+end
+
+namespace :update do
+  desc 'Update Vim plugins'
+  task :vim_plugins do
+    Rake::Task['install:vim_plugins'].invoke
+  end
 end
 
 desc 'Install these config files.'
@@ -130,9 +155,7 @@ task :default do
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
   Rake::Task['install:macvim'].invoke
-
-  step 'git submodules'
-  sh 'git submodule update --init'
+  Rake::Task['install:vim_plugins'].invoke
 
   # TODO install gem ctags?
   # TODO run gem ctags?

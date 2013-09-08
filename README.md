@@ -1,6 +1,7 @@
 # Maximum Awesome (Experimental) Linux Port
 
-Linux port of Maximum awesome from (https://github.com/square/maximum-awesome). Works on Ubuntu 13.04 with Gnome terminal.
+** Still very experimental **
+Linux (actually just Ubuntu) port of Maximum Awesome from (https://github.com/square/maximum-awesome).
 
 ## What's in it?
 
@@ -43,5 +44,4 @@ Linux port of Maximum awesome from (https://github.com/square/maximum-awesome). 
 
 ## Acknowledgements
 
-Thanks to the vimsters at Square who put this together. Thanks to Tim Pope for
-his awesome vim plugins.
+Thanks to the owners of the original maximum-awesome repo (https://github.com/square/maximum-awesome).

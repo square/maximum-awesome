@@ -70,22 +70,36 @@ namespace :install do
     sh 'sudo apt-get install ctags'
   end
 
-  # TODO this only works for 13.04, as per instructions here
   # https://github.com/ggreer/the_silver_searcher
   desc 'Install The Silver Searcher'
   task :the_silver_searcher do
     step 'the_silver_searcher'
-    sh 'sudo apt-get install software-properties-common'
-    sh 'sudo apt-add-repository ppa:mizuno-as/silversearcher-ag'
-    Rake::Task['install:update'].invoke
-    sh 'sudo apt-get install silversearcher-ag'
+    sh 'sudo apt-get install build-essential automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev'
+    sh 'git clone https://github.com/ggreer/the_silver_searcher.git'
+    Dir.chdir 'the_silver_searcher' do
+      sh './build.sh'
+      sh 'sudo make install'
+    end
   end
 
   # instructions from http://www.webupd8.org/2011/04/solarized-must-have-color-paletter-for.html
-  desc 'Install Solarized'
-  task :solarized do
+  desc 'Install Solarized and fix ls'
+  task :solarized, :arg1 do |t, args|
+    args[:arg1] = "dark" unless ["dark", "light"].include? args[:arg1]
+    color = ["dark", "light"].include?(args[:arg1]) ? args[:arg1] : "dark"
+
     step 'solarized'
-    sh 'git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git'
+    sh 'git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git' unless File.exist? 'gnome-terminal-colors-solarized'
+    Dir.chdir 'gnome-terminal-colors-solarized' do
+      sh "./solarize #{color}"
+    end
+
+    step 'fix ls-colors'
+    Dir.chdir do
+      sh "wget --no-check-certificate https://raw.github.com/seebi/dircolors-solarized/master/dircolors.ansi-#{color}"
+      sh "mv dircolors.ansi-#{color} .dircolors"
+      sh 'eval `dircolors .dircolors`'
+    end
   end
 end
 
@@ -111,19 +125,12 @@ task :default do
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end
 
-  step 'solarized color scheme'
-  Rake::Task['install:solarized'].invoke
-
-  step 'fix ls-colors'
-  Dir.chdir do
-    sh 'wget --no-check-certificate https://raw.github.com/seebi/dircolors-solarized/master/dircolors.ansi-dark'
-    sh 'mv dircolors.ansi-dark .dircolors'
-    sh 'eval `dircolors .dircolors`'
-  end
-
   step 'solarized dark or light'
   puts
-  puts " Now, you'll have to go into the maximum-awesome directory and do"
-  puts " cd gnome-terminal-colors-solarized "
-  puts " ./solarize dark # i'll get light working in a bit. "
+  puts " You're almost done! Inside of the maximum-awesome-linux directory, do: "
+  puts "   rake install:solarized['dark'] "
+  puts "     or                           "
+  puts "   rake install:solarized['light']"
+
+  puts " You may need to close your terminal and re-open it for it to take effect."
 end

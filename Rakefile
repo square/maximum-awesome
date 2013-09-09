@@ -5,6 +5,12 @@ def brew_install(package, *options)
   sh "brew install #{package} #{options.join ' '}"
 end
 
+def install_github_bundle(user, package)
+  unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
+    sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
+  end
+end
+
 def step(description)
   description = "-- #{description} "
   description = description.ljust(80, '-')
@@ -130,6 +136,13 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
       end
     end
   end
+
+  desc 'Install Vundle'
+  task :vundle do
+    step 'vundle'
+    install_github_bundle 'gmarik','vundle'
+    sh 'vim -c "BundleInstall" -c "q" -c "q"'
+  end
 end
 
 desc 'Install these config files.'
@@ -149,12 +162,19 @@ task :default do
   # TODO run gem ctags?
 
   step 'symlink'
-  link_file 'vim'       , '~/.vim'
-  link_file 'tmux.conf' , '~/.tmux.conf'
-  link_file 'vimrc'     , '~/.vimrc'
+  link_file 'vim'                   , '~/.vim'
+  link_file 'tmux.conf'             , '~/.tmux.conf'
+  link_file 'vimrc'                 , '~/.vimrc'
+  link_file 'vimrc.bundles'         , '~/.vimrc.bundles'
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end
+  unless File.exist?(File.expand_path('~/.vimrc.bundles.local'))
+    cp File.expand_path('vimrc.bundles.local'), File.expand_path('~/.vimrc.bundles.local'), :verbose => true
+  end
+
+  # Install Vundle and bundles
+  Rake::Task['install:vundle'].invoke
 
   step 'iterm2 colorschemes'
   colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`

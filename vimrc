@@ -1,11 +1,18 @@
-" set up pathogen, https://github.com/tpope/vim-pathogen
-filetype on " without this vim emits a zero exit status, later, because of :ft off
-filetype off
-call pathogen#infect()
-filetype plugin indent on
-
 " don't bother with vi compatibility
 set nocompatible
+
+" configure Vundle
+filetype on " without this vim emits a zero exit status, later, because of :ft off
+filetype off
+filetype plugin indent on
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" install Vundle bundles
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+  source ~/.vimrc.bundles.local
+endif
 
 " enable syntax highlighting
 syntax enable
@@ -48,7 +55,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <leader>l :Align
-nmap <leader>a :Ack 
+nmap <leader>a :Ack "Adding comment to save the whitespace
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>

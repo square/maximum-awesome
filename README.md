@@ -24,9 +24,6 @@ peace-loving hippies. Built for Mac OS X.
 * `^]` jump to definition using ctags
 * `,l` begins aligning lines on a string, usually used as `,l=` to align assignments
 * `^hjkl` move between windows, shorthand for `^w hjkl`
-* `ctrl+w w` switch between open windows
-* `ctrl+w s` split window horizontally
-* `ctrl+w v` split window vertically
 
 #### vim-airline statusbar
 

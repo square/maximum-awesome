@@ -88,7 +88,7 @@ namespace :install do
     'brew tap phinze/homebrew-cask'
     brew_install 'brew-cask'
     system <<-SHELL
-        export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+        ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
       SHELL
   end
 

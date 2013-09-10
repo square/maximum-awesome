@@ -24,6 +24,20 @@ peace-loving hippies. Built for Mac OS X.
 * `^]` jump to definition using ctags
 * `,l` begins aligning lines on a string, usually used as `,l=` to align assignments
 * `^hjkl` move between windows, shorthand for `^w hjkl`
+* `ctrl+6` switch between open buffers
+* `ctrl+w w` switch between open windows
+* `ctrl+w s` split window horizontally
+* `ctrl+w v` split window vertically
+
+#### vim-airline statusbar
+
+Maximum awesome ships with [vim-airline](https://github.com/bling/vim-airline) support. If you want fancy symbols you will need to do the following:
+
+1. Install PowerLine fonts. The fonts reside in the [powerline-fonts](https://github.com/Lokaltog/powerline-fonts) repo and installation instructions can be found [here](https://powerline.readthedocs.org/en/latest/fontpatching.html).
+2. Add the following to your `~/.vimrc.local`:
+
+    " Enable PowerLine fonts for vim-airline
+    let g:airline_powerline_fonts = 1
 
 ### tmux
 

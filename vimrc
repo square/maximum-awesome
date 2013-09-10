@@ -72,6 +72,9 @@ let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 
+" vim-airline settings
+let g:airline#extensions#tabline#enabled = 1
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column'

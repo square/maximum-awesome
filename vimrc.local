@@ -28,5 +28,8 @@ endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
+"Turn on token under cursor hl"
+autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
 set hlsearch "Turn on search highlighting."
 

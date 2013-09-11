@@ -269,10 +269,10 @@ task :default do
   if ubuntu?
     step 'solarized dark or light'
     puts
-    puts " You're almost done! Inside of the maximum-awesome-linux directory, do: "
-    puts "   rake install:solarized['dark'] "
+    puts " You're almost done! Inside of the maximum-awesome directory, do: "
+    puts "   rake install:ubuntu:solarized['dark'] "
     puts "     or                           "
-    puts "   rake install:solarized['light']"
+    puts "   rake install:ubuntu:solarized['light']"
     puts " You may need to close your terminal and re-open it for it to take effect."
   else
     step 'iterm2 profiles'

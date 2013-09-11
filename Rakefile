@@ -155,9 +155,6 @@ task :default do
   Rake::Task['install:tmux'].invoke
   Rake::Task['install:macvim'].invoke
 
-  step 'git submodules'
-  sh 'git submodule update --init'
-
   # TODO install gem ctags?
   # TODO run gem ctags?
 

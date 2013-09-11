@@ -12,14 +12,14 @@ def apt_install(package)
 end
 
 def linux?
-  return /linux/ =~ RUBY_PLATFORM
+  /linux/ =~ RUBY_PLATFORM
 end
 
 def ubuntu?
   linux? && File.exist?('/etc/lsb-release') && /Ubuntu/ =~ File.read('/etc/lsb-release')
 end
 
-def mac?
+def osx?
   /darwin/ =~ RUBY_PLATFORM
 end
 
@@ -85,13 +85,6 @@ def link_file(original_filename, symlink_filename)
 end
 
 namespace :install do
-  desc 'Install Vundle'
-  task :vundle do
-    step 'vundle'
-    install_github_bundle 'gmarik','vundle'
-    sh 'vim -c "BundleInstall" -c "q" -c "q"'
-  end
-
   namespace :osx do
     desc 'Update or Install Brew'
     task :brew do
@@ -101,29 +94,23 @@ namespace :install do
       end
     end
 
-    desc 'Install iTerm'
-    task :iterm do
-      step 'iterm2'
-      unless app? 'iTerm'
-        system <<-SHELL
-        curl -L -o iterm.zip http://iterm2.googlecode.com/files/iTerm2-1_0_0_20120203.zip && \
-          unzip iterm.zip && \
-          mv iTerm.app /Applications && \
-          rm iterm.zip
-        SHELL
-      end
-    end
-
     desc 'Install The Silver Searcher'
     task :the_silver_searcher do
       step 'the_silver_searcher'
       brew_install 'the_silver_searcher'
     end
 
-    desc 'Install tmux'
-    task :tmux do
-      step 'tmux'
-      brew_install 'tmux'
+    desc 'Install iTerm'
+    task :iterm do
+      step 'iterm2'
+      unless app? 'iTerm'
+        system <<-SHELL
+          curl -L -o iterm.zip http://iterm2.googlecode.com/files/iTerm2-1_0_0_20120203.zip && \
+            unzip iterm.zip && \
+            mv iTerm.app /Applications && \
+            rm iterm.zip
+        SHELL
+      end
     end
 
     desc 'Install ctags'
@@ -138,15 +125,21 @@ namespace :install do
       brew_install 'reattach-to-user-namespace'
     end
 
+    desc 'Install tmux'
+    task :tmux do
+      step 'tmux'
+      brew_install 'tmux'
+    end
+
     desc 'Install MacVim'
     task :macvim do
       step 'MacVim'
       unless app? 'MacVim'
         system <<-SHELL
-        curl -L -o macvim.tbz https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-64.tbz && \
-          bunzip2 macvim.tbz && tar xf macvim.tar && \
-          mv MacVim-snapshot-64/MacVim.app /Applications && \
-          rm -rf macvim.tbz macvim.tar MacVim-snapshot-64
+          curl -L -o macvim.tbz https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-64.tbz && \
+            bunzip2 macvim.tbz && tar xf macvim.tar && \
+            mv MacVim-snapshot-64/MacVim.app /Applications && \
+            rm -rf macvim.tbz macvim.tar MacVim-snapshot-64
         SHELL
         system ''
       end
@@ -217,6 +210,13 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
       end
     end
   end
+
+  desc 'Install Vundle'
+  task :vundle do
+    step 'vundle'
+    install_github_bundle 'gmarik','vundle'
+    sh 'vim -c "BundleInstall" -c "q" -c "q"'
+  end
 end
 
 desc 'Install these config files.'
@@ -227,13 +227,13 @@ task :default do
     Rake::Task['install:ubuntu:tmux'].invoke
     Rake::Task['install:ubuntu:ctags'].invoke
     Rake::Task['install:ubuntu:the_silver_searcher'].invoke
-  elsif mac?
+  elsif osx?
     Rake::Task['install:osx:brew'].invoke
-    Rake::Task['install:osx:iterm'].invoke
     Rake::Task['install:osx:the_silver_searcher'].invoke
-    Rake::Task['install:osx:tmux'].invoke
+    Rake::Task['install:osx:iterm'].invoke
     Rake::Task['install:osx:ctags'].invoke
     Rake::Task['install:osx:reattach_to_user_namespace'].invoke
+    Rake::Task['install:osx:tmux'].invoke
     Rake::Task['install:osx:macvim'].invoke
   else
     fail('Sorry, your system is not supported.')
@@ -257,15 +257,6 @@ task :default do
   # Install Vundle and bundles
   Rake::Task['install:vundle'].invoke
 
-  unless ubuntu?
-    step 'iterm2 colorschemes'
-    colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
-    dark  = colorschemes !~ /Solarized Dark/
-    light = colorschemes !~ /Solarized Light/
-    sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
-    sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
-  end
-
   if ubuntu?
     step 'solarized dark or light'
     puts
@@ -274,7 +265,14 @@ task :default do
     puts "     or                           "
     puts "   rake install:ubuntu:solarized['light']"
     puts " You may need to close your terminal and re-open it for it to take effect."
-  else
+  elsif osx?
+    step 'iterm2 colorschemes'
+    colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
+    dark  = colorschemes !~ /Solarized Dark/
+    light = colorschemes !~ /Solarized Light/
+    sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
+    sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
+
     step 'iterm2 profiles'
     puts
     puts "  Your turn!"

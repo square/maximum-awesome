@@ -1,7 +1,7 @@
 # Maximum Awesome
 
 Config files for vim and tmux, lovingly tended by a small subculture of
-peace-loving hippies. Built for Mac OS X.
+peace-loving hippies. Built for Mac OS X and Ubuntu.
 
 ## What's in it?
 

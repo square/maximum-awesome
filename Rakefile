@@ -1,5 +1,5 @@
 def brew_install(package, *options)
-  `brew list #{package}`
+  `brew list #{package} 2> /dev/null`
   return if $?.success?
 
   sh "brew install #{package} #{options.join ' '}"

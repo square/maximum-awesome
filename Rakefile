@@ -73,6 +73,11 @@ namespace :install do
     unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
       raise "Homebrew must be installed before continuing."
     end
+    `brew doctor`
+    unless $?.success?
+      raise "The brew doctor says that your system is not ready to brew.\n"+
+            "Please fix the errors."
+    end
   end
 
   desc 'Install The Silver Searcher'

@@ -112,6 +112,12 @@ namespace :install do
     brew_install 'tmux'
   end
 
+  desc 'Install homebrew vim'
+  task :vim do
+    step 'vim'
+    brew_install 'vim', '--override-system-vi'
+  end
+
   desc 'Install MacVim'
   task :macvim do
     step 'MacVim'
@@ -153,6 +159,7 @@ task :default do
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
+  Rake::Task['install:vim'].invoke
   Rake::Task['install:macvim'].invoke
 
   # TODO install gem ctags?

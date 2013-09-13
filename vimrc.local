@@ -1,4 +1,5 @@
 set nocursorline " don't highlight current line
+set number                                                   " show line numbers
 
 " keyboard shortcuts
 inoremap jj <ESC>

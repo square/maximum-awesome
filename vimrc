@@ -27,6 +27,7 @@ set clipboard=unnamed                                        " yank and paste wi
 set directory-=.                                             " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab                                                " expand tabs to spaces
+set history=700                                              " sets how many lines of history VIM has to remember
 set ignorecase                                               " case-insensitive search
 set incsearch                                                " search as you type
 set laststatus=2                                             " always show statusline

@@ -5,6 +5,10 @@ def brew_install(package, *options)
   sh "brew install #{package} #{options.join ' '}"
 end
 
+def brew_linkapps
+  sh "brew linkapps"
+end
+
 def install_github_bundle(user, package)
   unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
     sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
@@ -115,15 +119,8 @@ namespace :install do
   desc 'Install MacVim'
   task :macvim do
     step 'MacVim'
-    unless app? 'MacVim'
-      system <<-SHELL
-        curl -L -o macvim.tbz https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-64.tbz && \
-          bunzip2 macvim.tbz && tar xf macvim.tar && \
-          mv MacVim-snapshot-64/MacVim.app /Applications && \
-          rm -rf macvim.tbz macvim.tar MacVim-snapshot-64
-      SHELL
-      system ''
-    end
+    brew_install 'macvim', '--override-system-vim'
+    brew_linkapps
 
     bin_vim = File.expand_path('~/bin/vim')
     FileUtils.mkdir_p(File.dirname(bin_vim))

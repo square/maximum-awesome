@@ -5,10 +5,24 @@ def brew_install(package, *options)
   sh "brew install #{package} #{options.join ' '}"
 end
 
+def brew_cask_install(package, *options)
+  `brew cask list #{package}`
+  return if $?.success?
+
+  sh "brew cask install #{package} #{options.join ' '}"
+end
+
 def install_github_bundle(user, package)
   unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
     sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"
   end
+end
+
+def brew_cask_install(package, *options)
+  `brew cask list #{package}`
+  return if $?.success?
+
+  sh "brew cask install #{package} #{options.join ' '}"
 end
 
 def step(description)
@@ -75,6 +89,16 @@ namespace :install do
     end
   end
 
+  desc 'Install Homebrew Cask'
+  task :brew_cask do
+    step 'Homebrew Cask'
+    'brew tap phinze/homebrew-cask'
+    brew_install 'brew-cask'
+    system <<-SHELL
+        ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
+      SHELL
+  end
+
   desc 'Install The Silver Searcher'
   task :the_silver_searcher do
     step 'the_silver_searcher'
@@ -85,12 +109,7 @@ namespace :install do
   task :iterm do
     step 'iterm2'
     unless app? 'iTerm'
-      system <<-SHELL
-        curl -L -o iterm.zip http://iterm2.googlecode.com/files/iTerm2-1_0_0_20120203.zip && \
-          unzip iterm.zip && \
-          mv iTerm.app /Applications && \
-          rm iterm.zip
-      SHELL
+      brew_cask_install 'iterm2'
     end
   end
 
@@ -116,13 +135,7 @@ namespace :install do
   task :macvim do
     step 'MacVim'
     unless app? 'MacVim'
-      system <<-SHELL
-        curl -L -o macvim.tbz https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-64.tbz && \
-          bunzip2 macvim.tbz && tar xf macvim.tar && \
-          mv MacVim-snapshot-64/MacVim.app /Applications && \
-          rm -rf macvim.tbz macvim.tar MacVim-snapshot-64
-      SHELL
-      system ''
+        brew_cask_install 'macvim'
     end
 
     bin_vim = File.expand_path('~/bin/vim')
@@ -148,6 +161,7 @@ end
 desc 'Install these config files.'
 task :default do
   Rake::Task['install:brew'].invoke
+  Rake::Task['install:brew_cask'].invoke
   Rake::Task['install:the_silver_searcher'].invoke
   Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke

@@ -18,6 +18,13 @@ def install_github_bundle(user, package)
   end
 end
 
+def brew_cask_install(package, *options)
+  `brew cask list #{package}`
+  return if $?.success?
+
+  sh "brew cask install #{package} #{options.join ' '}"
+end
+
 def step(description)
   description = "-- #{description} "
   description = description.ljust(80, '-')

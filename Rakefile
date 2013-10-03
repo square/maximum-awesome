@@ -1,5 +1,5 @@
 def brew_install(package, *options)
-  `brew list #{package}`
+  `brew list #{package} 2> /dev/null`
   return if $?.success?
 
   sh "brew install #{package} #{options.join ' '}"
@@ -87,6 +87,11 @@ namespace :install do
     unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
       raise "Homebrew must be installed before continuing."
     end
+    `brew doctor`
+    unless $?.success?
+      raise "The brew doctor says that your system is not ready to brew.\n"+
+            "Please fix the errors."
+    end
   end
 
   desc 'Install Homebrew Cask'
@@ -131,6 +136,12 @@ namespace :install do
     brew_install 'tmux'
   end
 
+  desc 'Install homebrew vim'
+  task :vim do
+    step 'vim'
+    brew_install 'vim', '--override-system-vi'
+  end
+
   desc 'Install MacVim'
   task :macvim do
     step 'MacVim'
@@ -167,6 +178,7 @@ task :default do
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
+  Rake::Task['install:vim'].invoke
   Rake::Task['install:macvim'].invoke
 
   # TODO install gem ctags?

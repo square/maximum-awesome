@@ -85,11 +85,12 @@ namespace :install do
   desc 'Install Homebrew Cask'
   task :brew_cask do
     step 'Homebrew Cask'
-    'brew tap phinze/homebrew-cask'
+    unless system('brew tap phinze/homebrew-cask')
+      abort "Failed to tap phinze/homebrew-cask in Homebrew."
+    end
+
     brew_install 'brew-cask'
-    system <<-SHELL
-        ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
-      SHELL
+    ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
   end
 
   desc 'Install The Silver Searcher'

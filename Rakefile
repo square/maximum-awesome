@@ -5,13 +5,6 @@ def brew_install(package, *options)
   sh "brew install #{package} #{options.join ' '}"
 end
 
-def brew_cask_install(package, *options)
-  `brew cask list #{package}`
-  return if $?.success?
-
-  sh "brew cask install #{package} #{options.join ' '}"
-end
-
 def install_github_bundle(user, package)
   unless File.exist? File.expand_path("~/.vim/bundle/#{package}")
     sh "git clone https://github.com/#{user}/#{package} ~/.vim/bundle/#{package}"

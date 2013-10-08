@@ -85,7 +85,7 @@ namespace :install do
   desc 'Install Homebrew Cask'
   task :brew_cask do
     step 'Homebrew Cask'
-    unless system('brew tap | grep -v homebrew-cask > /dev/null') || system('brew tap phinze/homebrew-cask')
+    unless system('brew tap | grep homebrew-cask > /dev/null') || system('brew tap phinze/homebrew-cask')
       abort "Failed to tap phinze/homebrew-cask in Homebrew."
     end
 

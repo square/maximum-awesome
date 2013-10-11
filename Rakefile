@@ -129,7 +129,7 @@ namespace :install do
   task :macvim do
     step 'MacVim'
     unless app? 'MacVim'
-        brew_cask_install 'macvim'
+      brew_cask_install 'macvim'
     end
 
     bin_vim = File.expand_path('~/bin/vim')

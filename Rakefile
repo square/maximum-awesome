@@ -1,3 +1,5 @@
+ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
+
 def brew_install(package, *options)
   `brew list #{package}`
   return if $?.success?
@@ -12,8 +14,8 @@ def install_github_bundle(user, package)
 end
 
 def brew_cask_install(package, *options)
-  `brew cask list #{package}`
-  return if $?.success?
+  output = `brew cask info #{package}`
+  return unless output.include?('Not installed')
 
   sh "brew cask install #{package} #{options.join ' '}"
 end
@@ -90,7 +92,6 @@ namespace :install do
     end
 
     brew_install 'brew-cask'
-    ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
   end
 
   desc 'Install The Silver Searcher'
@@ -129,7 +130,7 @@ namespace :install do
   task :macvim do
     step 'MacVim'
     unless app? 'MacVim'
-        brew_cask_install 'macvim'
+      brew_cask_install 'macvim'
     end
 
     bin_vim = File.expand_path('~/bin/vim')

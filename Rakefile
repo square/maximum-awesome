@@ -1,3 +1,5 @@
+ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
+
 def brew_install(package, *options)
   `brew list #{package}`
   return if $?.success?
@@ -90,7 +92,6 @@ namespace :install do
     end
 
     brew_install 'brew-cask'
-    ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
   end
 
   desc 'Install The Silver Searcher'

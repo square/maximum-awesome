@@ -14,8 +14,8 @@ def install_github_bundle(user, package)
 end
 
 def brew_cask_install(package, *options)
-  `brew cask list #{package}`
-  return if $?.success?
+  output = `brew cask info #{package}`
+  return unless output.include?('Not installed')
 
   sh "brew cask install #{package} #{options.join ' '}"
 end

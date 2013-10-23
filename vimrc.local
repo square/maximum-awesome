@@ -33,3 +33,4 @@ autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<c
 
 set hlsearch "Turn on search highlighting."
 
+colorscheme desert

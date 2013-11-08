@@ -21,13 +21,13 @@ peace-loving hippies. Built for Mac OS X.
 * `\\` toggles visual selection comment lines
 * `vii`/`vai` visually select *in* or *around* the cursor's indent
 * `,[space]` strips trailing whitespace
-* `^]` jump to definition using ctags
+* `<C-]>` jump to definition using ctags
 * `,l` begins aligning lines on a string, usually used as `,l=` to align assignments
-* `^hjkl` move between windows, shorthand for `^w hjkl`
+* `<C-hjkl>` move between windows, shorthand for `<C-w> hjkl`
 
 ### tmux
 
-* `^a` is the prefix
+* `<C-a>` is the prefix
 * mouse scroll initiates tmux scroll
 * `prefix v` makes a vertical split
 * `prefix s` makes a horizontal split

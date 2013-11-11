@@ -1,0 +1,2 @@
+
+ctags --langmap=C++:+.cu

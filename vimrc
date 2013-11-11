@@ -9,6 +9,9 @@ language message zh_CN.UTF-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
 
+au BufNewFile,BufRead *.cu set ft=cu
+au BufNewFile,BufRead *.cuh set ft=cu
+
 set guifont=Monaco:h13  "by Eric
 let Tlist_Use_Right_Window=1 "by Eric
 let Tlist_File_Fold_Auto_Close=1 "by Eric
@@ -57,6 +60,8 @@ nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :CommandT<CR>
 nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
+" let g:tagbar_left = 1
+let g:tagbar_width = 45
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>c <Plug>Kwbd

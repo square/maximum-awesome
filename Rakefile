@@ -133,8 +133,17 @@ namespace :install do
       brew_cask_install 'macvim'
     end
 
-    bin_vim = File.expand_path('~/bin/vim')
-    FileUtils.mkdir_p(File.dirname(bin_vim))
+    bin_dir = File.expand_path('~/bin')
+    bin_vim = File.join(bin_dir, 'vim')
+    unless ENV['PATH'].split(':').include?(bin_dir)
+      puts 'Please add ~/bin to your PATH, e.g. run this command:'
+      puts
+      puts %{  echo 'export PATH="~/bin:$PATH"' >> ~/.bashrc}
+      puts
+      puts 'The exact command and file will vary by your shell and configuration.'
+    end
+
+    FileUtils.mkdir_p(bin_dir)
     unless File.executable?(bin_vim)
       File.open(bin_vim, 'w', 0744) do |io|
         io << <<-SHELL

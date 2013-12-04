@@ -27,6 +27,16 @@ def step(description)
   puts "\e[32m#{description}\e[0m"
 end
 
+def vim_installed?
+  `which vim`
+  return $?.success?
+end
+
+def vim_has_clipboard_support?
+  `vim --version | grep +clipboard`
+  return $?.success?
+end
+
 def app_path(name)
   path = "/Applications/#{name}.app"
   ["~#{path}", path].each do |full_path|
@@ -126,6 +136,15 @@ namespace :install do
     brew_install 'tmux'
   end
 
+  desc 'Install Vim'
+  task :vim do
+    step 'Vim'
+
+    unless vim_installed? && vim_has_clipboard_support?
+      brew_install 'vim'
+    end
+  end
+
   desc 'Install MacVim'
   task :macvim do
     step 'MacVim'
@@ -171,6 +190,7 @@ task :default do
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
+  Rake::Task['install:vim'].invoke
   Rake::Task['install:macvim'].invoke
 
   # TODO install gem ctags?

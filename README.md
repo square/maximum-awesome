@@ -9,6 +9,7 @@ peace-loving hippies. Built for Mac OS X.
 * [iTerm 2](http://www.iterm2.com/)
 * [tmux](http://tmux.sourceforge.net/)
 * Awesome syntax highlighting with the [Solarized color scheme](http://ethanschoonover.com/solarized)
+* Want to know more? [Fly Vim, First Class](http://corner.squareup.com/2013/08/fly-vim-first-class.html)
 
 ### vim
 
@@ -36,7 +37,12 @@ peace-loving hippies. Built for Mac OS X.
 
     rake
 
-## Contributing
+## Customize
+In your home directory, Maximum Awesome creates a `.vimrc.local` file where you can customize
+Vim to your heart’s content. However, we’d love to incorporate your changes and improve Vim
+for everyone, so feel free to fork Maximum Awesome and open some pull requests!
+
+## Contribute
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)

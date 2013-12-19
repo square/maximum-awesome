@@ -9,6 +9,7 @@ peace-loving hippies. Built for Mac OS X.
 * [iTerm 2](http://www.iterm2.com/)
 * [tmux](http://tmux.sourceforge.net/)
 * Awesome syntax highlighting with the [Solarized color scheme](http://ethanschoonover.com/solarized)
+* Want to know more? [Fly Vim, First Class](http://corner.squareup.com/2013/08/fly-vim-first-class.html)
 
 ### vim
 
@@ -21,13 +22,13 @@ peace-loving hippies. Built for Mac OS X.
 * `\\` toggles visual selection comment lines
 * `vii`/`vai` visually select *in* or *around* the cursor's indent
 * `,[space]` strips trailing whitespace
-* `^]` jump to definition using ctags
+* `<C-]>` jump to definition using ctags
 * `,l` begins aligning lines on a string, usually used as `,l=` to align assignments
-* `^hjkl` move between windows, shorthand for `^w hjkl`
+* `<C-hjkl>` move between windows, shorthand for `<C-w> hjkl`
 
 ### tmux
 
-* `^a` is the prefix
+* `<C-a>` is the prefix
 * mouse scroll initiates tmux scroll
 * `prefix v` makes a vertical split
 * `prefix s` makes a horizontal split
@@ -36,7 +37,12 @@ peace-loving hippies. Built for Mac OS X.
 
     rake
 
-## Contributing
+## Customize
+In your home directory, Maximum Awesome creates a `.vimrc.local` file where you can customize
+Vim to your heart’s content. However, we’d love to incorporate your changes and improve Vim
+for everyone, so feel free to fork Maximum Awesome and open some pull requests!
+
+## Contribute
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)

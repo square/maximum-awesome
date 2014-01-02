@@ -42,6 +42,12 @@ In your home directory, Maximum Awesome creates a `.vimrc.local` file where you 
 Vim to your heart’s content. However, we’d love to incorporate your changes and improve Vim
 for everyone, so feel free to fork Maximum Awesome and open some pull requests!
 
+## Uninstall
+
+    rake uninstall
+
+Note that this won't remove everything, but your vim configuration should be reset to whatever it was before installing. Some uninstallation steps will be manual.
+
 ## Contribute
 
 1. Fork it

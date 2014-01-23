@@ -3,18 +3,14 @@ set nocursorline " don't highlight current line
 " keyboard shortcuts
 inoremap jj <ESC>
 
-" highlight search
-"set hlsearch
-"nmap <leader>hl :let @/ = ""<CR>
-
 " gui settings
-if (&t_Co == 256 || has('gui_running'))
-  if ($TERM_PROGRAM == 'iTerm.app')
-    colorscheme solarized
-  else
-    colorscheme desert
-  endif
-endif
+"if (&t_Co == 256 || has('gui_running'))
+"  if ($TERM_PROGRAM == 'iTerm.app')
+"    colorscheme argonaut
+"  else
+"    colorscheme desert
+"  endif
+"endif
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
@@ -31,3 +27,5 @@ function! s:RemoveConflictingAlignMaps()
 endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
+
+Bundle 'rking/ag.vim'

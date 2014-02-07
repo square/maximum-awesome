@@ -68,6 +68,9 @@ nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nmap <silent> <S-H> ^
+nmap <silent> <S-L> $
+
 " in case you forgot to sudo
 cmap w!! %!sudo tee > /dev/null %
 

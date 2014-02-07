@@ -71,6 +71,12 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 nmap <silent> <S-H> ^
 nmap <silent> <S-L> $
 
+" Search highlighting is useful, but only if you can clear it when you're done.
+" Use ,h to clear highlighting
+set hlsearch
+nnoremap <silent> <leader>h :noh<return>
+noh
+
 " in case you forgot to sudo
 cmap w!! %!sudo tee > /dev/null %
 

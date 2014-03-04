@@ -25,6 +25,7 @@ peace-loving hippies. Built for Mac OS X.
 * `<C-]>` jump to definition using ctags
 * `,l` begins aligning lines on a string, usually used as `,l=` to align assignments
 * `<C-hjkl>` move between windows, shorthand for `<C-w> hjkl`
+* [vim-airline](https://github.com/bling/vim-airline).  Please see [vimrc.local](./vimrc.local) for more details on [powerline fonts](https://github.com/Lokaltog/powerline-fonts)
 
 ### tmux
 

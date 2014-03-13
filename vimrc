@@ -33,6 +33,7 @@ set laststatus=2                                             " always show statu
 set list                                                     " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set number                                                   " show line numbers
+set nostartofline                                            " Don't change column position when moving.
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
 set shiftwidth=2                                             " normal mode indentation commands use 2 spaces
@@ -68,6 +69,17 @@ nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nmap <silent> <S-H> ^
+nmap <silent> <S-L> $
+
+" When using . to replay commands, move the cursor back to where it replayed so you may use . repeatedly
+nmap . .`[
+
+" Search highlighting is useful, but only if you can clear it when you're done.
+" Use ,h to clear highlighting
+set hlsearch
+nnoremap <silent> <leader>h :noh<return>
+noh
 
 " in case you forgot to sudo
 cmap w!! %!sudo tee > /dev/null %
@@ -102,6 +114,11 @@ autocmd User Rails silent! Rnavcommand mediator       app/mediators             
 autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+autocmd BufEnter * syntax sync fromstart " Fixes syntax coloring issues when switching buffers
+
+setlocal cursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
@@ -111,6 +128,45 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+" Folding {{{
+set foldcolumn=1
+set foldnestmax=10
+set foldlevel=0
+set foldminlines=2
+" Toggle fold state between closed and opened.
+"
+" If there is no fold at current line, just moves forward.  If it is present, reverse it's state.
+fu! ToggleFold() " {{{
+  if foldlevel('.') == 0
+    normal! l
+  else
+    if foldclosed('.') < 0
+      . foldclose
+    else
+      . foldopen
+    endif
+  endif
+  echo
+endf " }}}
+
+fu! ToggleFoldRecursive() " {{{
+  if foldlevel('.') == 0
+    normal! l
+  else
+    if foldclosed('.') < 0
+      . foldclose!
+    else
+      . foldopen!
+    endif
+  endif
+  echo
+endf " }}}
+
+" Map this function to Space key.
+noremap <space> :call ToggleFold()<CR>
+noremap <S-space> :call ToggleFold()<CR>
+" }}}
 
 " Go crazy!
 if filereadable(expand("~/.vimrc.local"))
@@ -125,3 +181,5 @@ if filereadable(expand("~/.vimrc.local"))
   " noremap! jj <ESC>
   source ~/.vimrc.local
 endif
+
+" vim: ts=2:sts=2:sw=2:ft=vim:fdm=marker

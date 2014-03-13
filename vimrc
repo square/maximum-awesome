@@ -33,6 +33,7 @@ set laststatus=2                                             " always show statu
 set list                                                     " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set number                                                   " show line numbers
+set nostartofline                                            " Don't change column position when moving.
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
 set shiftwidth=2                                             " normal mode indentation commands use 2 spaces
@@ -70,6 +71,9 @@ nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 nmap <silent> <S-H> ^
 nmap <silent> <S-L> $
+
+" When using . to replay commands, move the cursor back to where it replayed so you may use . repeatedly
+nmap . .`[
 
 " Search highlighting is useful, but only if you can clear it when you're done.
 " Use ,h to clear highlighting
@@ -109,6 +113,7 @@ autocmd User Rails silent! Rnavcommand mediator       app/mediators             
 autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+autocmd BufEnter * syntax sync fromstart " Fixes syntax coloring issues when switching buffers
 
 setlocal cursorline
 autocmd WinEnter * setlocal cursorline

@@ -25,6 +25,7 @@ peace-loving hippies. Built for Mac OS X.
 * `<C-]>` jump to definition using ctags
 * `,l` begins aligning lines on a string, usually used as `,l=` to align assignments
 * `<C-hjkl>` move between windows, shorthand for `<C-w> hjkl`
+* `.` Will retain column position so it can be repeated more easily.
 * `,h` Clear all search highlighting
 * `[space]` Toggle open/close state of folds
 * `H` and `L` for beginning and end of line (similar semantics to `D`, `C`, etc)

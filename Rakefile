@@ -1,10 +1,21 @@
 ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 
 def brew_install(package, *options)
-  `brew list #{package}`
-  return if $?.success?
+  brew_tmux_query = `brew list #{package}`
 
-  sh "brew install #{package} #{options.join ' '}"
+  # if brew exits with error we install tmux
+  unless $?.success?
+    sh "brew install #{package} #{options.join ' '}"
+  else
+    # brew did not error out, verify tmux is greater than 1.8
+    # e.g. /usr/local/Cellar/tmux/1.9a/bin/tmux
+    # tmux copy-pipe function needs tmux >= 1.8
+    tmux_version = brew_tmux_query.split(/\n/).first.split('/')[5].to_f
+
+    unless tmux_version >= 1.8
+      sh "brew upgrade #{package} #{options.join ' '}"
+    end
+  end
 end
 
 def install_github_bundle(user, package)

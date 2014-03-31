@@ -1,23 +1,9 @@
 ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 
 def brew_install(package, *options)
-  brew_tmux_query = `brew list #{package} --versions`
-
-  # if brew exits with error we install tmux
-  unless $?.success?
-    sh "brew install #{package} #{options.join ' '}"
-  else
-    # brew did not error out, verify tmux is greater than 1.8
-    # e.g. brew_tmux_query = 'tmux 1.9a'
-    # tmux copy-pipe function needs tmux >= 1.8
-    tmux_installed_version = brew_tmux_query.split(/\n/).first.split(' ')[1]
-    tmux_installed_version = Gem::Version.new(tmux_installed_version)
-    tmux_1_8 = Gem::Version.new('1.8')
-
-    unless tmux_installed_version >= tmux_1_8
-      sh "brew upgrade #{package} #{options.join ' '}"
-    end
-  end
+  `brew list #{package}`
+  return if $?.success?
+  sh "brew install #{package} #{options.join ' '}"
 end
 
 def install_github_bundle(user, package)
@@ -162,6 +148,18 @@ namespace :install do
   task :tmux do
     step 'tmux'
     brew_install 'tmux'
+
+    # verify tmux is greater than 1.8
+    # e.g. brew_tmux_query = 'tmux 1.9a'
+    # tmux copy-pipe function needs tmux >= 1.8
+    brew_tmux_query = `brew list tmux --versions`
+    tmux_installed_version = brew_tmux_query.split(/\n/).first.split(' ')[1]
+    tmux_installed_version = Gem::Version.new(tmux_installed_version)
+    tmux_1_8 = Gem::Version.new('1.8')
+
+    unless tmux_installed_version >= tmux_1_8
+      sh "brew upgrade #{package}"
+    end
   end
 
   desc 'Install MacVim'

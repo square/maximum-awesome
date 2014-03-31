@@ -79,8 +79,6 @@ let g:gitgutter_enabled = 0
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-  let g:ackprg = 'ag --nogroup --column'
-
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 

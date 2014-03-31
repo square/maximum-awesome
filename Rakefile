@@ -1,23 +1,25 @@
 ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 
-def brew_install(package, *options)
-  brew_tmux_query = `brew list #{package} --versions`
+def brew_install(package, *args)
+  versions = `brew list #{package} --versions`
+  options = args.last.is_a?(Hash) ? args.pop : {}
 
   # if brew exits with error we install tmux
-  unless $?.success?
-    sh "brew install #{package} #{options.join ' '}"
-  else
+  if versions.empty?
+    sh "brew install #{package} #{args.join ' '}"
+  elsif options[:requires]
     # brew did not error out, verify tmux is greater than 1.8
     # e.g. brew_tmux_query = 'tmux 1.9a'
-    # tmux copy-pipe function needs tmux >= 1.8
-    tmux_installed_version = brew_tmux_query.split(/\n/).first.split(' ')[1]
-    tmux_installed_version = Gem::Version.new(tmux_installed_version)
-    tmux_1_8 = Gem::Version.new('1.8')
-
-    unless tmux_installed_version >= tmux_1_8
-      sh "brew upgrade #{package} #{options.join ' '}"
+    installed_version = versions.split(/\n/).first.split(' ')[1]
+    unless version_match?(options[:version], installed_version)
+      sh "brew upgrade #{package} #{args.join ' '}"
     end
   end
+end
+
+def version_match?(requirement, version)
+  # This is a hack, but it lets us avoid a gem dep for version checking.
+  Gem::Dependency.new('', requirement).match?('', version)
 end
 
 def install_github_bundle(user, package)
@@ -161,7 +163,8 @@ namespace :install do
   desc 'Install tmux'
   task :tmux do
     step 'tmux'
-    brew_install 'tmux'
+    # tmux copy-pipe function needs tmux >= 1.8
+    brew_install 'tmux', :requires => '>= 1.8'
   end
 
   desc 'Install MacVim'

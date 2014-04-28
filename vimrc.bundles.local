@@ -1,0 +1,4 @@
+" adding local bundles
+"
+Bundle 'vim-scripts/herald.vim'
+Bundle 'vim-scripts/Textile-for-VIM'

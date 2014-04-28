@@ -1,4 +1,6 @@
-set nocursorline " don't highlight current line
+set cursorline " do highlight current line
+
+autocmd FileType Markdown setlocal spell    " turn on spell checking
 
 " keyboard shortcuts
 inoremap jj <ESC>

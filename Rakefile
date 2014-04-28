@@ -174,7 +174,7 @@ namespace :install do
       brew_cask_install 'macvim'
     end
 
-    bin_dir = File.expand_path('~/bin')
+    bin_dir = File.expand_path('~/usr/bin')
     bin_vim = File.join(bin_dir, 'vim')
     unless ENV['PATH'].split(':').include?(bin_dir)
       puts 'Please add ~/bin to your PATH, e.g. run this command:'
@@ -199,7 +199,7 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
   task :vundle do
     step 'vundle'
     install_github_bundle 'gmarik','vundle'
-    sh '~/bin/vim -c "BundleInstall" -c "q" -c "q"'
+    sh '~/usr/bin/vim -c "BundleInstall" -c "q" -c "q"'
   end
 end
 

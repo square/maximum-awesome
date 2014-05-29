@@ -1,10 +1,25 @@
 ENV['HOMEBREW_CASK_OPTS'] = "--appdir=/Applications"
 
-def brew_install(package, *options)
-  `brew list #{package}`
-  return if $?.success?
+def brew_install(package, *args)
+  versions = `brew list #{package} --versions`
+  options = args.last.is_a?(Hash) ? args.pop : {}
 
-  sh "brew install #{package} #{options.join ' '}"
+  # if brew exits with error we install tmux
+  if versions.empty?
+    sh "brew install #{package} #{args.join ' '}"
+  elsif options[:requires]
+    # brew did not error out, verify tmux is greater than 1.8
+    # e.g. brew_tmux_query = 'tmux 1.9a'
+    installed_version = versions.split(/\n/).first.split(' ')[1]
+    unless version_match?(options[:version], installed_version)
+      sh "brew upgrade #{package} #{args.join ' '}"
+    end
+  end
+end
+
+def version_match?(requirement, version)
+  # This is a hack, but it lets us avoid a gem dep for version checking.
+  Gem::Dependency.new('', requirement).match?('', version)
 end
 
 def install_github_bundle(user, package)
@@ -104,7 +119,7 @@ namespace :install do
   desc 'Update or Install Brew'
   task :brew do
     step 'Homebrew'
-    unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
+    unless system('which brew > /dev/null || ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"')
       raise "Homebrew must be installed before continuing."
     end
   end
@@ -148,7 +163,8 @@ namespace :install do
   desc 'Install tmux'
   task :tmux do
     step 'tmux'
-    brew_install 'tmux'
+    # tmux copy-pipe function needs tmux >= 1.8
+    brew_install 'tmux', :requires => '>= 1.8'
   end
 
   desc 'Install MacVim'
@@ -196,7 +212,8 @@ end
 
 COPIED_FILES = filemap(
   'vimrc.local'         => '~/.vimrc.local',
-  'vimrc.bundles.local' => '~/.vimrc.bundles.local'
+  'vimrc.bundles.local' => '~/.vimrc.bundles.local',
+  'tmux.conf.local'     => '~/.tmux.conf.local'
 )
 
 LINKED_FILES = filemap(

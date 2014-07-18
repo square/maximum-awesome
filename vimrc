@@ -44,10 +44,6 @@ colorscheme solarized
 
 " Turn off side effects (only copy in visual mode)
 noremap dd "_dd
-noremap D "_D
-noremap d "_d
-noremap X "_X
-noremap x "_x
 
 " Tabs, only use :q to close
 nnoremap <C-h> :tabprevious<CR>
@@ -58,7 +54,7 @@ nnoremap <C-j> :tabnew<CR>
 let mapleader = ','
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <silent> ' :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>

@@ -291,15 +291,18 @@ task :uninstall do
 
   step 'iterm2'
   puts
-  puts 'Run this to uninstall iTerm:'
+  puts 'Run these commands to uninstall iTerm:'
   puts
   puts '  rm -rf /Applications/iTerm.app'
+  puts '  brew cask uninstall iterm2'
 
   step 'macvim'
   puts
-  puts 'Run this to uninstall MacVim:'
+  puts 'Run these commands to uninstall MacVim:'
   puts
   puts '  rm -rf /Applications/MacVim.app'
+  puts '  brew cask uninstall macvim'
+
 end
 
 task :default => :install

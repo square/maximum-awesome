@@ -266,6 +266,10 @@ task :install do
   puts "  (You can do this in 'Preferences' -> 'Profiles' by adding a new profile,"
   puts "  then clicking the 'Colors' tab, 'Load Presets...' and choosing a Solarized option.)"
   puts "  Also be sure to set Terminal Type to 'xterm-256color' in the 'Terminal' tab."
+  puts "  In Appearance, uncheck 'Color tab labels'"
+  puts "  In Profiles -> General tab, check 'Reuse previous session'"
+  puts "  Create ~/.vim/tmp for tmp files"
+  puts "  In .tmux.conf, you may need to add #'s" 
   puts
   puts "  Enjoy!"
   puts
@@ -291,15 +295,18 @@ task :uninstall do
 
   step 'iterm2'
   puts
-  puts 'Run this to uninstall iTerm:'
+  puts 'Run these commands to uninstall iTerm:'
   puts
   puts '  rm -rf /Applications/iTerm.app'
+  puts '  brew cask uninstall iterm2'
 
   step 'macvim'
   puts
-  puts 'Run this to uninstall MacVim:'
+  puts 'Run these commands to uninstall MacVim:'
   puts
   puts '  rm -rf /Applications/MacVim.app'
+  puts '  brew cask uninstall macvim'
+
 end
 
 task :default => :install

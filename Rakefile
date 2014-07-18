@@ -194,6 +194,10 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
         SHELL
       end
     end
+
+    # Put ~.swp backup files in ~/.vim/tmp
+    tmp_dir = File.expand_path('~/.vim/tmp')
+    FileUtils.mkdir_p(tmp_dir)
   end
 
   desc 'Install Vundle'
@@ -266,6 +270,8 @@ task :install do
   puts "  (You can do this in 'Preferences' -> 'Profiles' by adding a new profile,"
   puts "  then clicking the 'Colors' tab, 'Load Presets...' and choosing a Solarized option.)"
   puts "  Also be sure to set Terminal Type to 'xterm-256color' in the 'Terminal' tab."
+  puts "  In Appearance, uncheck 'Color tab labels'"
+  puts "  In Profiles -> General tab, check 'Reuse previous session'"
   puts
   puts "  Enjoy!"
   puts

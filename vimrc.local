@@ -3,14 +3,19 @@ set nocursorline " don't highlight current line
 " keyboard shortcuts
 inoremap jj <ESC>
 
+" wrap words with back-ticks
+map <F5> i`Ea`
+map <F6> i`ea`
+
 " gui settings
-"if (&t_Co == 256 || has('gui_running'))
-"  if ($TERM_PROGRAM == 'iTerm.app')
-"    colorscheme argonaut
-"  else
-"    colorscheme desert
-"  endif
-"endif
+if (&t_Co == 256 || has('gui_running'))
+  if ($TERM_PROGRAM == 'iTerm.app')
+    colorscheme argonaut
+    set background=dark   " argonaut is a dark background
+  else
+    colorscheme desert
+  endif
+endif
 "
 " Recognize puppet files as ruby syntax
 au BufRead,BufNewFile *.pp        set filetype=ruby
@@ -31,4 +36,3 @@ endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
-Bundle 'rking/ag.vim'

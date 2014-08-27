@@ -7,16 +7,8 @@ inoremap jj <ESC>
 map <F5> i`Ea`
 map <F6> i`ea`
 
-" gui settings
-if (&t_Co == 256 || has('gui_running'))
-  if ($TERM_PROGRAM == 'iTerm.app')
-    colorscheme argonaut
-    set background=dark   " argonaut is a dark background
-  else
-    colorscheme desert
-  endif
-endif
-"
+set background=dark
+
 " Recognize puppet files as ruby syntax
 au BufRead,BufNewFile *.pp        set filetype=ruby
 

@@ -57,6 +57,13 @@ Note that this won't remove everything, but your vim configuration should be res
 
 ## Contribute
 
+Before creating your pull request, consider whether the feature you want to add
+is something that you think *every* user of maximum-awesome should have. Is it
+support for a very common language people would ordinarily use vim to write? Is
+it a useful utility that does not change many defaults and composes well with
+other parts of maximum-awesome? If so then perhaps it would be a good fit. If
+not, perhaps keep it in your `*.local` files. This does not apply to bug fixes.
+
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)

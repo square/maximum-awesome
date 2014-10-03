@@ -127,8 +127,9 @@ namespace :install do
   desc 'Install Homebrew Cask'
   task :brew_cask do
     step 'Homebrew Cask'
-    unless system('brew tap | grep phinze/cask > /dev/null') || system('brew tap phinze/homebrew-cask')
-      abort "Failed to tap phinze/homebrew-cask in Homebrew."
+    system('brew untap phinze/cask') if system('brew tap | grep phinze/cask > /dev/null')
+    unless system('brew tap | grep caskroom/cask > /dev/null') || system('brew tap caskroom/homebrew-cask')
+      abort "Failed to tap caskroom/homebrew-cask in Homebrew."
     end
 
     brew_install 'brew-cask'

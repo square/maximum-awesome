@@ -31,3 +31,12 @@ function! s:RemoveConflictingAlignMaps()
 endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
+
+" Vim-Javascript plugin Options
+"
+" Enables HTML/CSS syntax highlighting in your JavaScript file.
+:set javascript_enable_domhtmlcss=1
+:set b:javascript_fold=0
+
+" Enable JSHint error highlighting
+let g:JSHintHighlightErrorLine=1

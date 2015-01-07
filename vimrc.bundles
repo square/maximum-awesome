@@ -1,4 +1,4 @@
-" Bundles here are part of the core Maximum Awesome setup
+" Bundles here are part of the CORE Maximum Awesome setup
 " Do NOT add bundles to this list, as they might get removed when you upgrade
 " Maximum Awesome.
 " Please create ~/.vimrc.bundles.local and add any extra bundles you want there
@@ -13,9 +13,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'rking/ag.vim'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
+Bundle 'garbas/vim-snipmate'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'nono/vim-handlebars'
 Bundle 'pangloss/vim-javascript'

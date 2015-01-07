@@ -13,7 +13,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'rking/ag.vim'
-Bundle 'garbas/snipmate.vim'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'nono/vim-handlebars'
 Bundle 'pangloss/vim-javascript'

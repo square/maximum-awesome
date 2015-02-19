@@ -1,13 +1,41 @@
-set nocursorline " don't highlight current line
+" F1 废弃这个键,防止调出系统帮助
+noremap <F1> <Esc>
+" F2 行号开关，用于鼠标复制代码用
+function! HideNumber()
+  if(&relativenumber == &number)
+    set relativenumber! number!
+  elseif(&number)
+    set number!
+  else
+    set relativenumber!
+  endif
+  set number?
+endfunc
+nnoremap <F2> :call HideNumber()<CR>
+" F3 显示可打印字符开关
+nnoremap <F3> :set list! list?<CR>
+" F4 换行开关
+nnoremap <F4> :set wrap! wrap?<CR>
+" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
+set pastetoggle=<F5>
+" F6 语法开关，关闭语法可以加快大文件的展示
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+" F10 to run python script
+nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<cr>
 
 " keyboard shortcuts
-inoremap jj <ESC>
+inoremap kj <ESC>
 
 " highlight search
-"set hlsearch
-"nmap <leader>hl :let @/ = ""<CR>
+set hlsearch
+nmap <leader>hl :let @/ = ""<CR>
+
+" Go to home and end using capitalized directions
+noremap H ^
+noremap L $
 
 " gui settings
+set background=dark
 if (&t_Co == 256 || has('gui_running'))
   if ($TERM_PROGRAM == 'iTerm.app')
     colorscheme solarized

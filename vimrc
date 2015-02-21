@@ -69,6 +69,7 @@ endif
 
 " keyboard shortcuts
 let mapleader = ','
+let g:mapleader = ','
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k

@@ -1,9 +1,6 @@
 " python fly check, 弥补syntastic只能打开和保存才检查语法的不足
 Plugin 'kevinw/pyflakes-vim'
 
-" for python.vim syntax highlight
-Plugin 'hdima/python-syntax'
-
 " Airline
 Plugin 'bling/vim-airline'
 

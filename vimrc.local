@@ -1,4 +1,5 @@
 " ####################################################################################
+
 " F1 废弃这个键,防止调出系统帮助
 noremap <F1> <Esc>
 " F2 行号开关，用于鼠标复制代码用
@@ -29,8 +30,23 @@ nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<cr>
 " F11
 " F12
 
-
 " ####################################################################################
+
+" Basic setting
+set noswapfile
+set title                " change the terminal's title
+set novisualbell         " don't beep
+set noerrorbells         " don't beep
+set t_vb=
+set tm=500
+set selection=inclusive
+set selectmode=mouse,key
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+set magic
+set showmode
+set nowrap
+set completeopt=longest,menu
 
 " File type setting
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
@@ -61,7 +77,6 @@ if has("gui_running")
     set showtabline=1
     set linespace=2
     set noimd
-    set t_Co=256
 endif
 
 " AutoSetFileHead
@@ -81,16 +96,6 @@ function! AutoSetFileHead()
     normal o
 endfunc
 
-" 保存文件时删除多余空格
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
-
 " ####################################################################################
 
 " keyboard shortcuts to jump to normal-mode(from insert-mode)
@@ -101,7 +106,15 @@ nnoremap U <C-r>
 
 " highlight search and remove the highlight result
 set hlsearch
-nmap <leader>hl :let @/ = ""<CR>
+set incsearch
+set ignorecase
+set smartcase
+noremap <silent><leader>/ :nohls<CR>
+
+" set foldenable
+set foldenable
+set foldmethod=indent
+set foldlevel=99
 
 " Go to home and end using capitalized directions
 noremap H ^
@@ -117,7 +130,14 @@ map Y y$
 " select all
 map <Leader>sa ggVG"
 
+" 命令行模式增强，ctrl - a到行首， -e 到行尾
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
 " ####################################################################################
+
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
 " This section is here to prevent AlignMaps from adding a bunch of mappings

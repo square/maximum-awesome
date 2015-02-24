@@ -136,6 +136,13 @@ cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
+" Resize the screen during the split-mode
+nnoremap <Up> <C-w>-
+nnoremap <Down> <C-w>+
+nnoremap <Left> <C-w><
+nnoremap <Right> <C-w>>
+
+
 " ####################################################################################
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.

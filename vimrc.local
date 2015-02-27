@@ -136,12 +136,11 @@ cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-" Resize the screen during the split-mode
-nnoremap <Up> <C-w>-
-nnoremap <Down> <C-w>+
-nnoremap <Left> <C-w><
-nnoremap <Right> <C-w>>
-
+" Resize the splited window
+noremap <Up> <C-w>+
+noremap <Down> <C-w>-
+noremap <Left> <C-w><
+noremap <Right> <C-w>>
 
 " ####################################################################################
 

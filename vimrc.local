@@ -33,20 +33,20 @@ nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<cr>
 " ####################################################################################
 
 " Basic setting
-set noswapfile
-set title                " change the terminal's title
-set novisualbell         " don't beep
+set backspace=eol,start,indent
+set completeopt=longest,menu
+set magic
 set noerrorbells         " don't beep
-set t_vb=
-set tm=500
+set noswapfile
+set novisualbell         " don't beep
+set nowrap
 set selection=inclusive
 set selectmode=mouse,key
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-set magic
 set showmode
-set nowrap
-set completeopt=longest,menu
+set t_vb=
+set title                " change the terminal's title
+set tm=500
+set whichwrap+=<,>,h,l
 
 " File type setting
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
@@ -69,14 +69,14 @@ if has("gui_running")
     if has("gui_gtk2")   "GTK2
         set guifont=Monaco\ 12, Monospace\ 12
     endif
-    set guioptions-=T
     set guioptions+=e
-    set guioptions-=r
     set guioptions-=L
+    set guioptions-=T
+    set guioptions-=r
     set guitablabel=%M\ %t
-    set showtabline=1
     set linespace=2
     set noimd
+    set showtabline=1
 endif
 
 " AutoSetFileHead
@@ -130,12 +130,6 @@ map Y y$
 " select all
 map <Leader>sa ggVG"
 
-" 命令行模式增强，ctrl - a到行首， -e 到行尾
-cnoremap <C-j> <t_kd>
-cnoremap <C-k> <t_ku>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-
 " Resize the splited window
 noremap <Up> <C-w>+
 noremap <Down> <C-w>-
@@ -160,17 +154,3 @@ endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
-"设置标记一列的背景颜色和数字一行颜色一致
-hi! link SignColumn   LineNr
-hi! link ShowMarksHLl DiffAdd
-hi! link ShowMarksHLu DiffChange
-
-"" for error highlight，防止错误整行标红导致看不清
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline
-highlight clear SpellRare
-highlight SpellRare term=underline cterm=underline
-highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline

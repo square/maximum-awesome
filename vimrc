@@ -6,9 +6,9 @@ syntax enable
 
 " configure Vundle
 filetype on " without this vim emits a zero exit status, later, because of :ft off
-filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+filetype off
 
 " install Vundle bundles
 if filereadable(expand("~/.vimrc.bundles"))
@@ -24,8 +24,8 @@ set autoread                                                 " reload files when
 set backspace=2                                              " Fix broken backspace in some setups
 set backupcopy=yes                                           " see :help crontab
 set clipboard=unnamed                                        " yank and paste with the system clipboard
-set cursorline
 set cursorcolumn
+set cursorline
 set directory-=.                                             " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab                                                " expand tabs to spaces

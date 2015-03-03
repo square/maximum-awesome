@@ -154,3 +154,7 @@ endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
+" ####################################################################################
+noremap <leader>zgh :! open https://github.com<CR>
+noremap <leader>zst :! open https://www.stackoverflow.com<CR>
+noremap <leader>zgg :! open https://www.google.com<CR>

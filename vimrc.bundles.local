@@ -9,3 +9,6 @@ Plugin 'klen/python-mode'
 
 " VIM-MULTIPLE-CURSORS
 Plugin 'terryma/vim-multiple-cursors'
+
+" Hacker-news
+Plugin 'ryanss/vim-hackernews'

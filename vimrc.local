@@ -47,6 +47,13 @@ set t_vb=
 set title                " change the terminal's title
 set tm=500
 set whichwrap+=<,>,h,l
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
+autocmd BufWritePost *.py call Pyflakes()
+autocmd BufWritePost *.py call Pep8()
 
 " File type setting
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai

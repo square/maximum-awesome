@@ -5,6 +5,7 @@
 Bundle 'airblade/vim-gitgutter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'austintaylor/vim-indentobject'
+Bundle 'bling/vim-airline'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'gmarik/vundle'
 Bundle 'juvenn/mustache.vim'

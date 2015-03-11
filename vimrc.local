@@ -31,3 +31,12 @@ function! s:RemoveConflictingAlignMaps()
 endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
+
+" Airline settings
+" Don't uncomment unless you've installed powerline fonts
+" https://github.com/Lokaltog/powerline-fonts
+" For best results with iTerm, use:
+"   Regular Font:   14pt Inconsolata for Powerline
+"   Non-ASCII Font: 13pt Inconsolata for Powerline
+"let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1

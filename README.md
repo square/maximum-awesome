@@ -44,6 +44,15 @@ You can adjust the size of the smaller panes in `tmux.conf` by lowering or incre
 
     rake
 
+## Update
+
+    rake
+
+This will update all installed plugins using Vundle's `:PluginInstall!`
+command. Any errors encountered during this process may be resolved by clearing
+out the problematic directories in ~/.vim/bundle. `:help PluginInstall`
+provides more detailed information about Vundle.
+
 ## Customize
 In your home directory, Maximum Awesome creates `.vimrc.local`, `.vimrc.bundles.local` and `.tmux.conf.local` files where you can customize
 Vim and tmux to your heart’s content. However, we’d love to incorporate your changes and improve Vim and tmux

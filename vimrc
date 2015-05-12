@@ -7,7 +7,7 @@ syntax enable
 " configure Vundle
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
-set rtp+=~/.vim/bundle/vundle.vim/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
 " install Vundle bundles

@@ -12,7 +12,7 @@ def brew_install(package, *args)
     # e.g. brew_tmux_query = 'tmux 1.9a'
     installed_version = versions.split(/\n/).first.split(' ')[1]
     unless version_match?(options[:version], installed_version)
-      sh "brew upgrade #{package} #{args.join ' '}"
+      sh "brew upgrade #{package} #{args.join ' '}" rescue nil
     end
   end
 end

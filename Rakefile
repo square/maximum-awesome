@@ -19,6 +19,8 @@ end
 
 def version_match?(requirement, version)
   # This is a hack, but it lets us avoid a gem dep for version checking.
+  # Gem dependencies must be numeric, so we remove non-numeric characters here.
+  version.gsub!(/[a-zA-Z]/, '')
   Gem::Dependency.new('', requirement).match?('', version)
 end
 

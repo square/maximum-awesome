@@ -11,7 +11,7 @@ def brew_install(package, *args)
     # brew did not error out, verify tmux is greater than 1.8
     # e.g. brew_tmux_query = 'tmux 1.9a'
     installed_version = versions.split(/\n/).first.split(' ')[1]
-    unless version_match?(options[:version], installed_version)
+    unless version_match?(options[:requires], installed_version)
       sh "brew upgrade #{package} #{args.join ' '}"
     end
   end
@@ -19,6 +19,8 @@ end
 
 def version_match?(requirement, version)
   # This is a hack, but it lets us avoid a gem dep for version checking.
+  # Gem dependencies must be numeric, so we remove non-numeric characters here.
+  version.gsub!(/[a-zA-Z]/, '')
   Gem::Dependency.new('', requirement).match?('', version)
 end
 

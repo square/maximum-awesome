@@ -96,7 +96,6 @@ alias egrep='egrep --color'
 alias fgrep='fgrep --color'
 alias date='cal;date'
 alias app='cd ~/Applications;ls -l'
-alias rm='rmtrash'
 alias wor='cd ~/workspace;ls -l'
 alias makescript="fc -rnl | head -1 >"
 alias genpasswd="strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 30 | tr -d '\n'; echo"

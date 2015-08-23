@@ -1,0 +1,167 @@
+" ####################################################################################
+
+" F1 废弃这个键,防止调出系统帮助
+noremap <F1> <Esc>
+" F2 行号开关，用于鼠标复制代码用
+function! HideNumber()
+  if(&relativenumber == &number)
+    set relativenumber! number!
+  elseif(&number)
+    set number!
+  else
+    set relativenumber!
+  endif
+  set number?
+endfunc
+nnoremap <F2> :call HideNumber()<CR>
+" F3 显示可打印字符开关
+nnoremap <F3> :set list! list?<CR>
+" F4 换行开关
+nnoremap <F4> :set wrap! wrap?<CR>
+" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
+set pastetoggle=<F5>
+" F6 语法开关，关闭语法可以加快大文件的展示
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+" F7
+" F8
+" F9
+" F10 to run python script
+nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<cr>
+" F11
+" F12
+
+" ####################################################################################
+
+" Basic setting
+set backspace=eol,start,indent
+set completeopt=longest,menu
+set magic
+set noerrorbells         " don't beep
+set noswapfile
+set novisualbell         " don't beep
+set nowrap
+set selection=inclusive
+set selectmode=mouse,key
+set showmode
+set t_vb=
+set title                " change the terminal's title
+set tm=500
+set whichwrap+=<,>,h,l
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
+autocmd BufWritePost *.py call Pyflakes()
+autocmd BufWritePost *.py call Pep8()
+
+" File type setting
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+
+" Plugin setting
+let g:pyflakes_use_quickfix = 0
+let python_highlight_all = 1
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" gui settings
+set background=dark
+let g:solarized_termtrans=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
+colorscheme solarized
+set t_Co=256
+
+if has("gui_running")
+    set guifont=Monaco:h14
+    if has("gui_gtk2")   "GTK2
+        set guifont=Monaco\ 12, Monospace\ 12
+    endif
+    set guioptions+=e
+    set guioptions-=L
+    set guioptions-=T
+    set guioptions-=r
+    set guitablabel=%M\ %t
+    set linespace=2
+    set noimd
+    set showtabline=1
+endif
+
+" AutoSetFileHead
+autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+function! AutoSetFileHead()
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+    endif
+
+    if &filetype == 'python'
+        call setline(1, "\#!/usr/bin/env python")
+        call append(1, "\# encoding: utf-8")
+    endif
+
+    normal G
+    normal o
+    normal o
+endfunc
+
+" ####################################################################################
+
+" keyboard shortcuts to jump to normal-mode(from insert-mode)
+inoremap kj <ESC>
+
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+
+" highlight search and remove the highlight result
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+noremap <silent><leader>/ :nohls<CR>
+
+" set foldenable
+set foldenable
+set foldmethod=indent
+set foldlevel=99
+
+" Go to home and end using capitalized directions
+noremap H ^
+noremap L $
+
+"Reselect visual block after indent/outdent.调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+
+" y$ -> Y Make Y behave like other capitals
+map Y y$
+
+" select all
+map <Leader>sa ggVG"
+
+" Resize the splited window
+noremap <Up> <C-w>+
+noremap <Down> <C-w>-
+noremap <Left> <C-w><
+noremap <Right> <C-w>>
+
+" ####################################################################################
+
+" Disambiguate ,a & ,t from the Align plugin, making them fast again.
+"
+" This section is here to prevent AlignMaps from adding a bunch of mappings
+" that interfere with the very-common ,a and ,t mappings. This will get run
+" at every startup to remove the AlignMaps for the *next* vim startup.
+"
+" If you do want the AlignMaps mappings, remove this section, remove
+" ~/.vim/bundle/Align, and re-run rake in maximum-awesome.
+function! s:RemoveConflictingAlignMaps()
+  if exists("g:loaded_AlignMapsPlugin")
+    AlignMapsClean
+  endif
+endfunction
+command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
+silent! autocmd VimEnter * RemoveConflictingAlignMaps
+
+" ####################################################################################
+noremap <leader>zgh :! open https://github.com<CR>
+noremap <leader>zst :! open https://www.stackoverflow.com<CR>
+noremap <leader>zgg :! open https://www.google.com<CR>

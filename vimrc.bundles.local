@@ -1,11 +1,8 @@
-" python fly check, 弥补syntastic只能打开和保存才检查语法的不足
-Plugin 'kevinw/pyflakes-vim'
-
 " Airline
 Plugin 'bling/vim-airline'
 
 " Python Mode
-" Plugin 'klen/python-mode'
+ Plugin 'klen/python-mode'
 
 " VIM-MULTIPLE-CURSORS
 Plugin 'terryma/vim-multiple-cursors'

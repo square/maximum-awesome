@@ -1,7 +1,7 @@
 " ####################################################################################
-
 " F1 废弃这个键,防止调出系统帮助
 noremap <F1> <Esc>
+
 " F2 行号开关，用于鼠标复制代码用
 function! HideNumber()
   if(&relativenumber == &number)
@@ -14,20 +14,30 @@ function! HideNumber()
   set number?
 endfunc
 nnoremap <F2> :call HideNumber()<CR>
+
 " F3 显示可打印字符开关
 nnoremap <F3> :set list! list?<CR>
+
 " F4 换行开关
 nnoremap <F4> :set wrap! wrap?<CR>
+
 " F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
 set pastetoggle=<F5>
+
 " F6 语法开关，关闭语法可以加快大文件的展示
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
 " F7
+
 " F8
+
 " F9
+
 " F10 to run python script
 nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<cr>
+
 " F11
+
 " F12
 
 " ####################################################################################
@@ -50,8 +60,6 @@ set whichwrap+=<,>,h,l
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_auto_loc_list=1
-let g:syntastic_loc_list_height=5
 
 " For Python PEP8 rules
 set textwidth=79  " lines longer than 79 columns will be broken
@@ -69,6 +77,8 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 let g:pyflakes_use_quickfix = 0
 let python_highlight_all = 1
 let g:nerdtree_tabs_open_on_console_startup=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
 
 " gui settings
 set background=dark

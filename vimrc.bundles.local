@@ -1,0 +1,18 @@
+" Airline
+Plugin 'bling/vim-airline'
+
+" Python Mode
+ Plugin 'klen/python-mode'
+
+" VIM-MULTIPLE-CURSORS
+Plugin 'terryma/vim-multiple-cursors'
+
+" Hacker-news
+Plugin 'ryanss/vim-hackernews'
+
+" for ipython
+Plugin 'ivanov/vim-ipython'
+
+" vimshell
+Plugin 'Shougo/vimshell.vim'
+

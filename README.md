@@ -18,8 +18,8 @@ peace-loving hippies. Built for Mac OS X.
 * `,b` restricts ctrlp.vim to open buffers
 * `,a` starts project search with [ag.vim](https://github.com/rking/ag.vim) using [the silver searcher](https://github.com/ggreer/the_silver_searcher) (like ack, but faster)
 * `ds`/`cs` delete/change surrounding characters (e.g. `"Hey!"` + `ds"` = `Hey!`, `"Hey!"` + `cs"'` = `'Hey!'`) with [vim-surround](https://github.com/tpope/vim-surround)
-* `\\\` toggles current line comment
-* `\\` toggles visual selection comment lines
+* `gcc` toggles current line comment
+* `gc` toggles visual selection comment lines
 * `vii`/`vai` visually select *in* or *around* the cursor's indent
 * `Vp`/`vp` replaces visual selection with default register *without* yanking selected text (works with any visual selection)
 * `,[space]` strips trailing whitespace
@@ -43,6 +43,15 @@ You can adjust the size of the smaller panes in `tmux.conf` by lowering or incre
 ## Install
 
     rake
+
+## Update
+
+    rake
+
+This will update all installed plugins using Vundle's `:PluginInstall!`
+command. Any errors encountered during this process may be resolved by clearing
+out the problematic directories in ~/.vim/bundle. `:help PluginInstall`
+provides more detailed information about Vundle.
 
 ## Customize
 In your home directory, Maximum Awesome creates `.vimrc.local`, `.vimrc.bundles.local` and `.tmux.conf.local` files where you can customize

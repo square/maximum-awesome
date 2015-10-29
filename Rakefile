@@ -167,7 +167,7 @@ namespace :install do
   task :tmux do
     step 'tmux'
     # tmux copy-pipe function needs tmux >= 1.8
-    brew_install 'tmux', :requires => '>= 1.8'
+    brew_install 'tmux', :requires => '>= 2.1'
   end
 
   desc 'Install MacVim'

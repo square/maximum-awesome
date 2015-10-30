@@ -10,7 +10,7 @@ def brew_install(package, *args)
   elsif options[:requires]
     # brew did not error out, verify tmux is greater than 1.8
     # e.g. brew_tmux_query = 'tmux 1.9a'
-    installed_version = versions.split(/\n/).first.split(' ')[1]
+    installed_version = versions.split(/\n/).first.split(' ').last
     unless version_match?(options[:requires], installed_version)
       sh "brew upgrade #{package} #{args.join ' '}"
     end
@@ -167,7 +167,7 @@ namespace :install do
   task :tmux do
     step 'tmux'
     # tmux copy-pipe function needs tmux >= 1.8
-    brew_install 'tmux', :requires => '>= 1.8'
+    brew_install 'tmux', :requires => '>= 2.1'
   end
 
   desc 'Install MacVim'

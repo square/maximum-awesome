@@ -10,7 +10,7 @@ def brew_install(package, *args)
   elsif options[:requires]
     # brew did not error out, verify tmux is greater than 1.8
     # e.g. brew_tmux_query = 'tmux 1.9a'
-    installed_version = versions.split(/\n/).first.split(' ')[1]
+    installed_version = versions.split(/\n/).first.split(' ').last
     unless version_match?(options[:requires], installed_version)
       sh "brew upgrade #{package} #{args.join ' '}"
     end
@@ -34,7 +34,7 @@ def brew_cask_install(package, *options)
   output = `brew cask info #{package}`
   return unless output.include?('Not installed')
 
-  sh "brew cask install #{package} #{options.join ' '}"
+  sh "brew cask install --binarydir=#{`brew --prefix`.chomp}/bin #{package} #{options.join ' '}"
 end
 
 def step(description)
@@ -167,7 +167,7 @@ namespace :install do
   task :tmux do
     step 'tmux'
     # tmux copy-pipe function needs tmux >= 1.8
-    brew_install 'tmux', :requires => '>= 1.8'
+    brew_install 'tmux', :requires => '>= 2.1'
   end
 
   desc 'Install MacVim'
@@ -201,7 +201,7 @@ exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
   desc 'Install Vundle'
   task :vundle do
     step 'vundle'
-    install_github_bundle 'gmarik','vundle'
+    install_github_bundle 'VundleVim','Vundle.vim'
     sh '~/bin/vim -c "PluginInstall!" -c "q" -c "q"'
   end
 end

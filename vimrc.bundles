@@ -2,14 +2,14 @@
 " Do NOT add bundles to this list, as they might get removed when you upgrade
 " Maximum Awesome.
 " Please create ~/.vimrc.bundles.local and add any extra bundles you want there
-Plugin 'gmarik/vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'austintaylor/vim-indentobject'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'juvenn/mustache.vim'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'

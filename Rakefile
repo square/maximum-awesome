@@ -185,6 +185,7 @@ namespace :install do
       puts %{  echo 'export PATH="~/bin:$PATH"' >> ~/.bashrc}
       puts
       puts 'The exact command and file will vary by your shell and configuration.'
+      puts 'You may need to restart your shell.'
     end
 
     FileUtils.mkdir_p(bin_dir)

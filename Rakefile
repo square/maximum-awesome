@@ -20,8 +20,9 @@ end
 def version_match?(requirement, version)
   # This is a hack, but it lets us avoid a gem dep for version checking.
   # Gem dependencies must be numeric, so we remove non-numeric characters here.
-  version.gsub!(/[a-zA-Z]/, '')
-  Gem::Dependency.new('', requirement).match?('', version)
+  matches = version.match(/(?<versionish>\d+\.\d+)/)
+  return false unless matches.length > 0
+  Gem::Dependency.new('', requirement).match?('', matches.captures[0])
 end
 
 def install_github_bundle(user, package)

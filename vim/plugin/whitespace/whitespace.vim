@@ -10,5 +10,5 @@ endfunction
 
 " strip trailing whitespace on Ruby buffer saves
 augroup whitespace
-  autocmd BufWritePre *.rb call whitespace#strip_trailing()
+  autocmd FileType c,cpp,eruby,java,markdown,php,ruby,sh,yml autocmd BufWritePre <buffer> call whitespace#strip_trailing()
 augroup END

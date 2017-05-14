@@ -20,8 +20,9 @@ end
 def version_match?(requirement, version)
   # This is a hack, but it lets us avoid a gem dep for version checking.
   # Gem dependencies must be numeric, so we remove non-numeric characters here.
-  version.gsub!(/[a-zA-Z]/, '')
-  Gem::Dependency.new('', requirement).match?('', version)
+  matches = version.match(/(?<versionish>\d+\.\d+)/)
+  return false unless matches.length > 0
+  Gem::Dependency.new('', requirement).match?('', matches.captures[0])
 end
 
 def install_github_bundle(user, package)
@@ -130,11 +131,9 @@ namespace :install do
   task :brew_cask do
     step 'Homebrew Cask'
     system('brew untap phinze/cask') if system('brew tap | grep phinze/cask > /dev/null')
-    unless system('brew tap | grep caskroom/cask > /dev/null') || system('brew tap caskroom/homebrew-cask')
-      abort "Failed to tap caskroom/homebrew-cask in Homebrew."
+    unless system('brew tap | grep caskroom/cask > /dev/null') || system('brew tap caskroom/cask')
+      abort "Failed to tap caskroom/cask in Homebrew."
     end
-
-    brew_install 'brew-cask'
   end
 
   desc 'Install The Silver Searcher'
@@ -185,6 +184,7 @@ namespace :install do
       puts %{  echo 'export PATH="~/bin:$PATH"' >> ~/.bashrc}
       puts
       puts 'The exact command and file will vary by your shell and configuration.'
+      puts 'You may need to restart your shell.'
     end
 
     FileUtils.mkdir_p(bin_dir)

@@ -34,3 +34,7 @@ silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
 "Turn on token under cursor hl"
 autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
+" Turn on 4 space tabs for markdown.
+" Helps with compatability with some markdown parsers.
+au FileType markdown setl sw=4 sts=4 et

@@ -247,7 +247,7 @@ task :install do
   end
 
   COPIED_FILES.each do |orig, copy|
-    cp orig, copy, :verbose => true unless File.exist?(copy)
+    cp orig, copy, :verbose => true unless File.exist?(copy) and File.read(orig) == File.read(copy)
   end
 
   # Install Vundle and bundles

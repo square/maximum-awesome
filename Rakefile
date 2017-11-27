@@ -257,8 +257,8 @@ task :install do
   colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
   dark  = colorschemes !~ /Solarized Dark/
   light = colorschemes !~ /Solarized Light/
-  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
-  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
+  sh('open', '-a', '~/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
+  sh('open', '-a', '~/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
 
   step 'iterm2 profiles'
   puts

@@ -5,16 +5,16 @@ peace-loving hippies. Built for Mac OS X.
 
 ## What's in it?
 
-* [MacVim](https://code.google.com/p/macvim/) (independent or for use in a terminal)
+* [MacVim](https://github.com/macvim-dev/macvim) (independent or for use in a terminal)
 * [iTerm 2](http://www.iterm2.com/)
-* [tmux](http://tmux.sourceforge.net/)
+* [tmux](http://tmux.github.io/)
 * Awesome syntax highlighting with the [Solarized color scheme](http://ethanschoonover.com/solarized)
-* Want to know more? [Fly Vim, First Class](http://corner.squareup.com/2013/08/fly-vim-first-class.html)
+* Want to know more? [Fly Vim, First Class](https://corner.squareup.com/2013/08/fly-vim-first-class.html)
 
 ### vim
 
 * `,d` brings up [NERDTree](https://github.com/scrooloose/nerdtree), a sidebar buffer for navigating and manipulating files
-* `,t` brings up [ctrlp.vim](https://github.com/kien/ctrlp.vim), a project file filter for easily opening specific files
+* `,t` brings up [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim), a project file filter for easily opening specific files
 * `,b` restricts ctrlp.vim to open buffers
 * `,a` starts project search with [ag.vim](https://github.com/rking/ag.vim) using [the silver searcher](https://github.com/ggreer/the_silver_searcher) (like ack, but faster)
 * `ds`/`cs` delete/change surrounding characters (e.g. `"Hey!"` + `ds"` = `Hey!`, `"Hey!"` + `cs"'` = `'Hey!'`) with [vim-surround](https://github.com/tpope/vim-surround)
@@ -43,6 +43,15 @@ You can adjust the size of the smaller panes in `tmux.conf` by lowering or incre
 ## Install
 
     rake
+
+## Update
+
+    rake
+
+This will update all installed plugins using Vundle's `:PluginInstall!`
+command. Any errors encountered during this process may be resolved by clearing
+out the problematic directories in ~/.vim/bundle. `:help PluginInstall`
+provides more detailed information about Vundle.
 
 ## Customize
 In your home directory, Maximum Awesome creates `.vimrc.local`, `.vimrc.bundles.local` and `.tmux.conf.local` files where you can customize

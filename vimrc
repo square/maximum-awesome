@@ -46,6 +46,20 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu                                                 " show a navigable menu for tab completion
 set wildmode=longest,list,full
 
+" Set standard tabs instead of default space tabs on a per directory basis
+function! SetStandardTabs()
+  set noexpandtab
+  set tabstop=8
+  set softtabstop=8
+  set shiftwidth=8
+endfunction
+
+" Add directories here when files have full tabs
+augroup PerDirectoryTabs
+  autocmd!
+  autocmd BufRead,BufEnter,BufNewFile ~/Sites/orbitz/web-wl/~ call SetStandardTabs()
+augroup END
+
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
 if exists('$TMUX')  " Support resizing in tmux
@@ -127,3 +141,33 @@ if filereadable(expand("~/.vimrc.local"))
   " noremap! jj <ESC>
   source ~/.vimrc.local
 endif
+
+Plugin 'tpope/vim-dispatch'
+
+" ~/.vimrc
+set background=dark
+colorscheme railscasts
+
+highlight clear SignColumn
+highlight VertSplit    ctermbg=236
+highlight ColorColumn  ctermbg=237
+highlight LineNr       ctermbg=236 ctermfg=240
+highlight CursorLineNr ctermbg=236 ctermfg=240
+highlight CursorLine   ctermbg=236
+highlight StatusLineNC ctermbg=238 ctermfg=0
+highlight StatusLine   ctermbg=240 ctermfg=12
+highlight IncSearch    ctermbg=3   ctermfg=1
+highlight Search       ctermbg=1   ctermfg=3
+highlight Visual       ctermbg=3   ctermfg=0
+highlight Pmenu        ctermbg=240 ctermfg=12
+highlight PmenuSel     ctermbg=3   ctermfg=1
+highlight SpellBad     ctermbg=0   ctermfg=1
+
+" Show hidden files in NERDtree
+let NERDTreeShowHidden=1
+
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+

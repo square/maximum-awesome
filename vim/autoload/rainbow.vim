@@ -1,5 +1,4 @@
 if exists('s:loaded') | finish | endif | let s:loaded = 1
-
 fun s:resolve_parenthesis(p)
 	let ls = split(a:p, '\v%(%(start|step|end)\=(.)%(\1@!.)*\1[^ ]*|\w+%(\=[^ ]*)?) ?\zs', 0)
 	let [paren, containedin, contains, op] = ['', '', 'TOP', '']

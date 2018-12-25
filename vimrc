@@ -1,30 +1,42 @@
 " don't bother with vi compatibility
 set nocompatible
-set undodir=~/.vim/.undo/
+set undofile
+set undodir=~/.maximum-awesome/.undo/
+
+set copyindent
+
+" Folding
+  set foldmethod=indent
+  set foldnestmax=10
+  set nofoldenable
+  set foldlevel=2
+  set foldcolumn=3
 
 " enable syntax highlighting
 syntax enable
 
+" Tmux & Clipboard
+set clipboard=unnamed
 
-" asciidoctor 
-let g:syntastic_asciidoc_asciidoc_exec = "asciidoctor"
 
 " limit to 79
-augroup collumnLimit
+" Autocmds
+  augroup collumnLimit
   autocmd!
-  autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml  highlight CollumnLimit ctermbg=DarkGrey guibg=DarkGrey
+  autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml
+  \ highlight CollumnLimit ctermbg=DarkGrey guibg=DarkGrey
   let collumnLimit = 79 " feel free to customize
   let pattern =
-        \ '\%<' . (collumnLimit+1) . 'v.\%>' . collumnLimit . 'v'
+  \ '\%<' . (collumnLimit+1) . 'v.\%>' . collumnLimit . 'v'
   autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml
-        \ let w:m1=matchadd('CollumnLimit', pattern, -1)
-augroup END
+  \ let w:m1=matchadd('CollumnLimit', pattern, -1)
+  augroup END
 
 
 " configure Vundle
-filetype on " without this vim emits a zero exit status, later, because of :ft off
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+    filetype on " without this vim emits a zero exit status, later, because of :ft off
+    filetype off
+    set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " install Vundle bundles
@@ -32,7 +44,6 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
   source ~/.vimrc.bundles.local
 endif
-
 call vundle#end()
 
 " ensure ftdetect et al work by including this after the Vundle stuff
@@ -50,8 +61,7 @@ set ignorecase                                               " case-insensitive 
 set incsearch                                                " search as you type
 set laststatus=2                                             " always show statusline
 set list                                                     " show trailing whitespace
-set listchars=tab:▸\ ,trail:▫
-" set number                                                   " show line numbers
+set listchars=tab:▸\ ,trail:·,eol:¬
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
 set shiftwidth=2                                             " normal mode indentation commands use 2 spaces
@@ -90,13 +100,15 @@ noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
 
-" plugin settings
-let g:ctrlp_match_window = 'order:ttb,max:20'
-let g:NERDSpaceDelims=1
-let g:gitgutter_enabled = 0
-let g:vim_asciidoc_initial_foldlevel=1
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-let g:rainbow_conf = {
+" plugin settings asciidoct/asciidoctor 
+  let g:ctrlp_match_window = 'order:ttb,max:20'
+  let g:NERDSpaceDelims=1
+  let g:gitgutter_enabled = 0
+  let g:vim_asciidoc_initial_foldlevel=1
+  " asciidoctor
+  let g:syntastic_asciidoc_asciidoc_exec = "asciidoctor"
+  let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+  let g:rainbow_conf = {
 	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
 	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
 	\	'operators': '_,_',
@@ -118,8 +130,6 @@ let g:rainbow_conf = {
 	\		'css': 0,
 	\	}
 	\}
-
-
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -129,14 +139,16 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" fdoc is yaml
-autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-" md is markdown
-autocmd BufRead,BufNewFile *.md set filetype=markdown
+"Spelling and file settings
+  " fdoc is yaml
+  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml spell
+  " md is markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown spell
+  " mdoc is  asciidoctor or asciidoc
+  autocmd BufRead,BufNewfile *.adoc set filetype=asciidoc spell
+  "Jinja 2
+  autocmd BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja spell
 
-" adoc is  asciidoctor or asciidoc 
-autocmd BufRead,BufNewfile *.adoc set filetype=asciidoc spell
-autocmd BufRead,BufNewFile *.md set spell
 "
 " extra rails.vim help
 autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
@@ -182,8 +194,6 @@ function! NumberToggle()
    else
         set relativenumber
    endif
-endfunc
+  endfunc
 " nnoremap <C-n> :call NumberToggle()<cr>
 call NumberToggle()
-
-Plugin 'auto-pairs-gentle'

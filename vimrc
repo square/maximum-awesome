@@ -16,19 +16,18 @@ set copyindent
 syntax enable
 
 " Tmux & Clipboard
-set clipboard=unnamed
-
+set clipboard^=unnamed
 
 " limit to 79
 " Autocmds
   augroup collumnLimit
   autocmd!
-  autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml
+  autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml,yml,bash
   \ highlight CollumnLimit ctermbg=DarkGrey guibg=DarkGrey
   let collumnLimit = 79 " feel free to customize
   let pattern =
   \ '\%<' . (collumnLimit+1) . 'v.\%>' . collumnLimit . 'v'
-  autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml
+  autocmd BufEnter,WinEnter,FileType scala,java,asciidoc,yaml,yml,bash
   \ let w:m1=matchadd('CollumnLimit', pattern, -1)
   augroup END
 
@@ -69,12 +68,14 @@ set showcmd
 set smartcase                                                " case-sensitive search if any caps
 set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
 set tabstop=8                                                " actual tabs occupy 8 characters
-set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+" set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip                     " MacOSX/Linux
 set wildmenu                                                 " show a navigable menu for tab completion
 set wildmode=longest,list,full
 
-" Enable basic mouse behavior such as resizing buffers.
-set mouse=a
+" Enable basic mouse behavior such as resizing buffers. Off for iTerm2 on Mac
+" section on preference to copy on select.
+" set mouse=a
 if exists('$TMUX')  " Support resizing in tmux
   set ttymouse=xterm2
 endif
@@ -93,6 +94,7 @@ nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>] :TagbarToggle<CR>
+nnoremap <leader>y :call system('nc -U ~/.clipper.sock', @0)<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -139,15 +141,30 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-"Spelling and file settings
-  " fdoc is yaml
-  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml spell
-  " md is markdown
-  autocmd BufRead,BufNewFile *.md set filetype=markdown spell
-  " mdoc is  asciidoctor or asciidoc
-  autocmd BufRead,BufNewfile *.adoc set filetype=asciidoc spell
+" setting bad words to underline instead of highlighed
+hi clear SpellBad
+hi SpellBad cterm=underline
+hi SpellBad ctermfg=red guifg=red
+
+"Spelling and file types
+  augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+  augroup END
+
+  augroup AsciidocSpell
+    autocmd!
+    autocmd FileType asciidoc setlocal spell
+    autocmd BufRead,BufNewFile *.adoc setlocal spell
+  augroup END
+
+
   "Jinja 2
   autocmd BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja spell
+  " yaml,yml,bash spelling
+  autocmd Filetype yaml setlocal spell
+  autocmd BufNewFile,BufRead *.bash,*.sh set ft=bash spell 
 
 "
 " extra rails.vim help
@@ -169,6 +186,7 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
+
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
 
@@ -186,7 +204,7 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
-"" Line Numbers {{{2
+" Line Numbers 
 function! NumberToggle()
    if(&relativenumber == 1)
         set nornu

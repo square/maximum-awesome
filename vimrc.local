@@ -41,3 +41,9 @@ au FileType markdown setl sw=4 sts=4 et
 
 " Use c++11.
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
+let g:fireplace_pprint_fn = 'pp/pprint'
+"let g:fireplace_print_right_margin = 
+"let g:fireplace_print_length=10
+"let g:fireplace_print_level = 2
+"let g:fireplace_print_meta = 

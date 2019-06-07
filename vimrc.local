@@ -38,3 +38,6 @@ autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<c
 " Turn on 4 space tabs for markdown.
 " Helps with compatability with some markdown parsers.
 au FileType markdown setl sw=4 sts=4 et
+
+" Use c++11.
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'

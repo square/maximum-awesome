@@ -156,6 +156,12 @@ namespace :install do
     brew_install 'ctags'
   end
 
+  desc 'Install clang-format'
+  task :clang_format do
+    step 'clang_format'
+    brew_install 'clang-format'
+  end
+
   desc 'Install reattach-to-user-namespace'
   task :reattach_to_user_namespace do
     step 'reattach-to-user-namespace'
@@ -233,6 +239,7 @@ task :install do
   Rake::Task['install:the_silver_searcher'].invoke
   Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke
+  Rake::Task['install:clang_format'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
   Rake::Task['install:macvim'].invoke

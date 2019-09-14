@@ -142,6 +142,12 @@ namespace :install do
     brew_install 'the_silver_searcher'
   end
 
+  desc 'Install cscreen'
+  task :cscreen do
+    step 'cscreen'
+    brew_install 'cscreen'
+  end
+
   desc 'Install iTerm'
   task :iterm do
     step 'iterm2'

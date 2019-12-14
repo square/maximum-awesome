@@ -145,7 +145,13 @@ namespace :install do
   desc 'Install cscreen'
   task :cscreen do
     step 'cscreen'
-    brew_install 'cscreen'
+    brew_cask_install 'cscreen'
+  end
+
+  desc 'Install shellcheck'
+  task :shellcheck do
+    step 'shellcheck'
+    brew_install 'shellcheck'
   end
 
   desc 'Install iTerm'
@@ -243,6 +249,8 @@ task :install do
   Rake::Task['install:brew'].invoke
   Rake::Task['install:brew_cask'].invoke
   Rake::Task['install:the_silver_searcher'].invoke
+  Rake::Task['install:cscreen'].invoke
+  Rake::Task['install:shellcheck'].invoke
   Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:clang_format'].invoke

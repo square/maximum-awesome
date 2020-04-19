@@ -248,7 +248,8 @@ LINKED_FILES = filemap(
   'tmux.conf'     => '~/.tmux.conf',
   'vimrc'         => '~/.vimrc',
   'vimrc.bundles' => '~/.vimrc.bundles',
-  'bash.profile'  => '~/.bash_profile'
+  'bash.profile'  => '~/.bash_profile',
+  'zshrc'         => '~/.zshrc'
 )
 
 desc 'Install these config files.'

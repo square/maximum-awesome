@@ -148,6 +148,12 @@ namespace :install do
     brew_cask_install 'cscreen'
   end
 
+  desc 'Install antigen'
+  task :antigen do
+    step 'antigen'
+    brew_install 'antigen'
+  end
+
   desc 'Install shellcheck'
   task :shellcheck do
     step 'shellcheck'
@@ -258,6 +264,7 @@ task :install do
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
   Rake::Task['install:macvim'].invoke
+  Rake::Task['install:antigen'].invoke
 
   # TODO install gem ctags?
   # TODO run gem ctags?

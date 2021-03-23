@@ -32,10 +32,10 @@ def install_github_bundle(user, package)
 end
 
 def brew_cask_install(package, *options)
-  output = `brew cask info #{package}`
+  output = `brew info --cask #{package}`
   return unless output.include?('Not installed')
 
-  sh "brew cask install #{package} #{options.join ' '}"
+  sh "brew install --cask #{package} #{options.join ' '}"
 end
 
 def step(description)

@@ -78,6 +78,9 @@ let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 
+" use the new SnipMate parser
+let g:snipMate = { 'snippet_version' : 1 }
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep

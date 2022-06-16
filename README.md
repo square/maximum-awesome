@@ -6,12 +6,19 @@ peace-loving hippies. Built for Mac OS X.
 ## What's in it?
 
 * [MacVim](https://github.com/macvim-dev/macvim) (independent or for use in a terminal)
-* [iTerm 2](http://www.iterm2.com/)
-* [tmux](http://tmux.github.io/)
-* Awesome syntax highlighting with the [Solarized color scheme](http://ethanschoonover.com/solarized)
-* Want to know more? [Fly Vim, First Class](https://corner.squareup.com/2013/08/fly-vim-first-class.html)
+* [iTerm 2](https://www.iterm2.com/)
+* [tmux](https://tmux.github.io/)
+* Awesome syntax highlighting with the [Solarized color scheme](https://ethanschoonover.com/solarized/)
+* Want to know more? [Fly Vim, First Class](https://developer.squareup.com/blog/fly-vim-first-class)
 
 ### vim
+
+The following assume your leader key is set to `,`. 
+
+You can change your leader key using the following setting in your `.vimrc`:
+
+`let mapleader=','`
+
 
 * `,d` brings up [NERDTree](https://github.com/scrooloose/nerdtree), a sidebar buffer for navigating and manipulating files
 * `,t` brings up [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim), a project file filter for easily opening specific files

@@ -13,7 +13,7 @@ peace-loving hippies. Built for Mac OS X.
 
 ### vim
 
-The following assume your leader key is set to `,`. 
+The following assume your [leader key](https://vim.works/2019/03/03/vims-leader-key-wtf-is-it/#:~:text=Vim%20has%20the%20key,easier%20to%20type%20or%20remember.) is set to `,`. 
 
 You can change your leader key using the following setting in your `.vimrc`:
 

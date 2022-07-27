@@ -45,6 +45,8 @@ set tabstop=8                                                " actual tabs occup
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu                                                 " show a navigable menu for tab completion
 set wildmode=longest,list,full
+set modelines=0                                              " Disable modeline as a security precaution
+set nomodeline
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a

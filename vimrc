@@ -7,8 +7,14 @@ syntax enable
 " configure Vundle
 filetype on " without this vim emits a zero exit status, later, because of :ft off
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Specify a directory for plugins.
+call plug#begin()
 
 " install Vundle bundles
 if filereadable(expand("~/.vimrc.bundles"))
@@ -16,7 +22,7 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles.local
 endif
 
-call vundle#end()
+call plug#end()
 
 " ensure ftdetect et al work by including this after the Vundle stuff
 filetype plugin indent on

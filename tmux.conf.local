@@ -1,1 +1,4 @@
 # Add your local tmux config here
+# Set a new prefix / leader key.
+set -g prefix `
+bind ` send-prefix

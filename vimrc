@@ -16,7 +16,7 @@ endif
 " Specify a directory for plugins.
 call plug#begin()
 
-" install Vundle bundles
+" install vim plugins
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
   source ~/.vimrc.bundles.local
@@ -47,7 +47,7 @@ set shiftwidth=2                                             " normal mode inden
 set showcmd
 set smartcase                                                " case-sensitive search if any caps
 set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
-set tabstop=8                                                " actual tabs occupy 8 characters
+set tabstop=4                                                " actual tabs occupy 8 characters
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu                                                 " show a navigable menu for tab completion
 set wildmode=longest,list,full
@@ -83,6 +83,62 @@ cnoremap w!! %!sudo tee > /dev/null %
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
+
+"{{ youcompleteme
+  " ---> youcompleteme configuration <---
+  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+  " ---> compatibility with another plugin (ultisnips) <---
+  let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>' ]
+  let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
+  let g:SuperTabDefaultCompletionType = '<C-n>'
+" ---> disable preview window <---
+  set completeopt-=preview
+  " Let clangd fully control code completion
+  let g:ycm_clangd_uses_ycmd_caching = 0
+  " " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+  let g:ycm_clangd_binary_path = exepath("clangd")"
+" ---> navigating to the definition of a a symbol <---
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"}}
+
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.vue,*.phtml,*.js,*.jsx,*.coffee,*.erb'
+
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" -----------------------------------------------------------------------------
+" Color settings
+" -----------------------------------------------------------------------------
+
+colorscheme gruvbox
+" For Gruvbox to look correct in terminal Vim you'll want to source a palette
+" script that comes with the Gruvbox plugin.
+"
+" Add this to your ~/.profile file:
+"   source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+
+" Gruvbox comes with both a dark and light theme.
+set background=dark
+
+" Gruvbox has 'hard', 'medium' (default) and 'soft' contrast options.
+let g:gruvbox_contrast_light='hard'
+
+" This needs to come last, otherwise the colors aren't correct.
+syntax on
+
+if (&background == 'dark')
+  " Fix the disgusting visual selection colors of gruvbox (thanks @romainl).
+  hi Visual cterm=NONE ctermfg=NONE ctermbg=237 guibg=#3a3a3a
+
+  " Set a custom highlight color when yanking text.
+  "   This requires having the plugin: machakann/vim-highlightedyank
+  hi HighlightedyankRegion cterm=NONE ctermbg=239 guibg=#4e4e4e
+else
+  hi Visual cterm=NONE ctermfg=NONE ctermbg=223 guibg=#ffd7af
+  hi HighlightedyankRegion cterm=NONE ctermbg=228 guibg=ffff87
+endif
 
 " use the new SnipMate parser
 let g:snipMate = { 'snippet_version' : 1 }

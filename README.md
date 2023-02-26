@@ -65,6 +65,8 @@ In your home directory, Maximum Awesome creates `.vimrc.local`, `.vimrc.bundles.
 Vim and tmux to your heart’s content. However, we’d love to incorporate your changes and improve Vim and tmux
 for everyone, so feel free to fork Maximum Awesome and open some pull requests!
 
+Note: Add symbolic link to the correct python version. Can test out the queried version using `:py3 import os`. Should work after creating the sym link.
+
 ## Uninstall
 
     rake uninstall

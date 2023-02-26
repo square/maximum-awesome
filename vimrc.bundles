@@ -39,3 +39,22 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/greplace.vim'
 Plug 'vim-scripts/matchit.zip'
+Plug 'gruvbox-community/gruvbox'
+Plug 'valloric/youcompleteme', { 'do': 'python3 ./install.py --clangd-compiler' }
+Plug 'machakann/vim-highlightedyank'
+" ---> git commands within vim <---
+Plug 'tpope/vim-fugitive'
+"  " ---> git changes on the gutter <---
+Plug 'airblade/vim-gitgutter'
+"  " ---> nerdtree git changes <---
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"{{ Autopairs
+" ---> closing XML tags <---
+Plug 'alvan/vim-closetag'
+" ---> files on which to activate tags auto-closing <---
+  let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.vue,*.phtml,*.js,*.jsx,*.coffee,*.erb'
+" ---> closing braces and brackets <---
+Plug 'jiangmiao/auto-pairs'
+"}}
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'

@@ -77,7 +77,7 @@ end
 def link_file(original_filename, symlink_filename)
   original_path = File.expand_path(original_filename)
   symlink_path = File.expand_path(symlink_filename)
-  if File.exists?(symlink_path) || File.symlink?(symlink_path)
+  if File.exist?(symlink_path) || File.symlink?(symlink_path)
     if File.symlink?(symlink_path)
       symlink_points_to_path = File.readlink(symlink_path)
       return if symlink_points_to_path == original_path

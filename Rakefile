@@ -65,7 +65,7 @@ def get_backup_path(path)
     if number > 1
       backup_path = "#{backup_path}#{number}"
     end
-    if File.exists?(backup_path) || File.symlink?(backup_path)
+    if File.exist?(backup_path) || File.symlink?(backup_path)
       number += 1
       next
     end
